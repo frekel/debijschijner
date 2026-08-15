@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class WpAssetController extends Controller
@@ -34,18 +33,6 @@ class WpAssetController extends Controller
             ]);
         }
 
-        $s3 = Storage::disk('s3');
-
-        if (! $s3->exists($relativePath)) {
-            abort(404);
-        }
-
-        $content = $s3->get($relativePath);
-        $mime = $s3->mimeType($relativePath) ?: 'application/octet-stream';
-
-        return response($content, 200, [
-            'Content-Type' => $mime,
-            'Cache-Control' => 'public, max-age=31536000',
-        ]);
+        abort(404);
     }
 }
