@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
+use Illuminate\Support\Str;
 use Throwable;
 
 class SitePageController extends Controller
@@ -29,6 +30,8 @@ class SitePageController extends Controller
             $html = $slug === 'contact'
                 ? $this->decorateContactPageHtml($page->html)
                 : $page->html;
+
+            $html = $this->localizeExternalAssetReferences($html);
 
             return response($html, 200, [
                 'Content-Type' => 'text/html; charset=UTF-8',
@@ -63,9 +66,48 @@ class SitePageController extends Controller
             $html = $this->decorateContactPageHtml($html);
         }
 
+        $html = $this->localizeExternalAssetReferences($html);
+
         return response($html, 200, [
             'Content-Type' => 'text/html; charset=UTF-8',
         ]);
+    }
+
+    private function localizeExternalAssetReferences(string $html): string
+    {
+        $html = str_replace(
+            [
+                "<link rel='dns-prefetch' href='//www.googletagmanager.com' />",
+                "<link rel='dns-prefetch' href='//fonts.googleapis.com' />",
+            ],
+            '',
+            $html,
+        );
+
+        $html = preg_replace_callback('/href=("|\')([^"\']*fonts\.googleapis\.com[^"\']*)\1/i', function (array $matches): string {
+            $quote = $matches[1];
+            $url = html_entity_decode($matches[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+            if (Str::startsWith($url, '//')) {
+                $url = 'https:'.$url;
+            }
+
+            if (! Str::startsWith($url, 'https://fonts.googleapis.com')) {
+                return $matches[0];
+            }
+
+            $local = '/external/fonts/google/'.substr(sha1($url), 0, 12).'.css';
+
+            return 'href='.$quote.$local.$quote;
+        }, $html) ?? $html;
+
+        $html = preg_replace_callback('/src=("|\')https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=GT-TX9T54P6\1/i', function (array $matches): string {
+            $quote = $matches[1];
+
+            return 'src='.$quote.'/external/googletag/gtag.js'.$quote;
+        }, $html) ?? $html;
+
+        return $html;
     }
 
     private function decorateContactPageHtml(string $html): string

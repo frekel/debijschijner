@@ -8,7 +8,10 @@ class ContactFormTest extends TestCase
 {
     public function test_contact_form_submits_successfully(): void
     {
-        $response = $this->post('/contact', [
+        $token = 'test-csrf-token';
+
+        $response = $this->withSession(['_token' => $token])->post('/contact', [
+            '_token' => $token,
             'wpforms' => [
                 'fields' => [
                     0 => [
@@ -30,7 +33,10 @@ class ContactFormTest extends TestCase
 
     public function test_contact_form_requires_required_fields(): void
     {
-        $response = $this->from('/contact')->post('/contact', [
+        $token = 'test-csrf-token';
+
+        $response = $this->withSession(['_token' => $token])->from('/contact')->post('/contact', [
+            '_token' => $token,
             'wpforms' => [
                 'fields' => [
                     0 => [

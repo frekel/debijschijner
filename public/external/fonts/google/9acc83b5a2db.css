@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url(/external/fonts/google/files/bd757f1ad06c84be.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  src: url(/external/fonts/google/files/38cd786c2a409251.ttf) format('truetype');
+}
