@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ContactSubmissionAdminController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PageAdminController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\ContactController;
@@ -13,6 +14,7 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
 
     Route::middleware('admin.auth')->group(function (): void {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('contact-submissions', [ContactSubmissionAdminController::class, 'index'])->name('contact-submissions.index');
         Route::get('contact-submissions/export', [ContactSubmissionAdminController::class, 'export'])->name('contact-submissions.export');
 
