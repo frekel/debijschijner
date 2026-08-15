@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/css/external/fonts/google/files/4ba165ae1d701de6.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  src: url(/css/external/fonts/google/files/9cae11fa43d5b812.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url(/css/external/fonts/google/files/f061d2cebf12582d.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(/css/external/fonts/google/files/4ebedac3c6eeba79.ttf) format('truetype');
+}

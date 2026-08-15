@@ -96,7 +96,7 @@ class SitePageController extends Controller
                 return $matches[0];
             }
 
-            $local = '/external/fonts/google/'.substr(sha1($url), 0, 12).'.css';
+            $local = '/css/external/fonts/google/'.substr(sha1($url), 0, 12).'.css';
 
             return 'href='.$quote.$local.$quote;
         }, $html) ?? $html;
@@ -104,7 +104,7 @@ class SitePageController extends Controller
         $html = preg_replace_callback('/src=("|\')https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=GT-TX9T54P6\1/i', function (array $matches): string {
             $quote = $matches[1];
 
-            return 'src='.$quote.'/external/googletag/gtag.js'.$quote;
+            return 'src='.$quote.'/js/external/googletag/gtag.js'.$quote;
         }, $html) ?? $html;
 
         return $html;
