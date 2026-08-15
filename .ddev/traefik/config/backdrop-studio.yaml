@@ -1,0 +1,104 @@
+#ddev-generated
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file. DDEV will not then
+# update it, for example if you add `additional_hostnames`, etc.
+
+http:
+  routers:
+    backdrop-studio-web-80-http:
+      entrypoints:
+        - http-33006
+      rule: HostRegexp(`^backdrop-studio\.ddev\.site$`)
+      
+      service: "backdrop-studio-web-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "backdrop-studio-redirectHttps"
+    backdrop-studio-web-8025-http:
+      entrypoints:
+        - http-8025
+      rule: HostRegexp(`^backdrop-studio\.ddev\.site$`)
+      
+      service: "backdrop-studio-web-8025"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "backdrop-studio-redirectHttps"
+    backdrop-studio-xhgui-80-http:
+      entrypoints:
+        - http-8143
+      rule: HostRegexp(`^backdrop-studio\.ddev\.site$`)
+      
+      service: "backdrop-studio-xhgui-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "backdrop-studio-redirectHttps"
+    
+    
+    
+    backdrop-studio-web-80-https:
+      entrypoints:
+        - http-33007
+      rule: HostRegexp(`^backdrop-studio\.ddev\.site$`)
+      
+      service: "backdrop-studio-web-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    backdrop-studio-web-8025-https:
+      entrypoints:
+        - http-8026
+      rule: HostRegexp(`^backdrop-studio\.ddev\.site$`)
+      
+      service: "backdrop-studio-web-8025"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+    backdrop-studio-xhgui-80-https:
+      entrypoints:
+        - http-8142
+      rule: HostRegexp(`^backdrop-studio\.ddev\.site$`)
+      
+      service: "backdrop-studio-xhgui-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+
+  middlewares:
+    backdrop-studio-redirectHttps:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+  services:
+    backdrop-studio-web-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-backdrop-studio-web:80
+        
+    backdrop-studio-web-8025:
+      loadbalancer:
+        servers:
+          - url: http://ddev-backdrop-studio-web:8025
+        
+    
+    
+    backdrop-studio-xhgui-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-backdrop-studio-xhgui:80
+        
+    
+    
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/backdrop-studio.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/backdrop-studio.key
