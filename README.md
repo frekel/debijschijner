@@ -56,3 +56,31 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Debijschijner CMS migration notes
+
+This project includes a first WordPress-to-Laravel migration layer:
+
+- Public pages are served by `SitePageController`.
+- Content is stored in a `pages` table (slug, title, html, publish status).
+- Initial content can be seeded from files in `resources/migrated/site`.
+- Admin CRUD is available at `/admin/pages`.
+
+### 1) Run DB migration + seed
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+### 2) Open admin
+
+- URL: `/admin/pages`
+- Create/edit page HTML directly in the admin forms.
+- Use slug `home` for the homepage.
+
+### 3) Route behavior
+
+- `/` resolves to slug `home`.
+- `/{path}` resolves to slug `{path}` (example: `/over-mij` -> `over-mij`).
+- If DB is unavailable, the app falls back to HTML snapshots in `resources/migrated/site`.
