@@ -23,11 +23,11 @@ class ContactSubmissionResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'email';
 
-    protected static ?string $navigationLabel = 'ContactForm';
+    protected static ?string $navigationLabel = 'Contact formulier';
 
-    protected static ?string $modelLabel = 'ContactForm';
+    protected static ?string $modelLabel = 'Contact formulier';
 
-    protected static ?string $pluralModelLabel = 'ContactForms';
+    protected static ?string $pluralModelLabel = 'Contact formulieren';
 
     protected static ?int $navigationSort = 2;
 

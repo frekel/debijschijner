@@ -23,11 +23,11 @@ class ApplySubmissionResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'email';
 
-    protected static ?string $navigationLabel = 'RequestForm';
+    protected static ?string $navigationLabel = 'Aanvraag formulier';
 
-    protected static ?string $modelLabel = 'RequestForm';
+    protected static ?string $modelLabel = 'Aanvraag formulier';
 
-    protected static ?string $pluralModelLabel = 'RequestForms';
+    protected static ?string $pluralModelLabel = 'Aanvraag formulieren';
 
     protected static ?int $navigationSort = 3;
 
