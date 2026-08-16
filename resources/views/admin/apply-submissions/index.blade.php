@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact inzendingen</title>
+    <title>Aanvraag inzendingen</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 2rem; }
         table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
@@ -17,11 +17,10 @@
 </head>
 <body>
     <div class="top">
-        <h1>Contact inzendingen</h1>
+        <h1>Aanvraag inzendingen</h1>
         <div class="controls">
-            <a class="button" href="{{ route('admin.apply-submissions.index') }}">Aanvraag inzendingen</a>
-            <a class="button" href="{{ route('admin.pages.index') }}">Pagina beheer</a>
-            <a class="button" href="{{ route('admin.contact-submissions.export') }}">CSV export</a>
+            <a class="button" href="{{ route('admin.dashboard') }}">Dashboard</a>
+            <a class="button" href="{{ route('admin.apply-submissions.export') }}">CSV export</a>
             <form method="POST" action="{{ route('admin.logout') }}" style="display:inline;">
                 @csrf
                 <button type="submit" style="padding: .5rem .8rem; border: 1px solid #ccc; background: #fff; cursor: pointer;">Uitloggen</button>
@@ -36,6 +35,7 @@
                 <th>Naam</th>
                 <th>Email</th>
                 <th>Telefoon</th>
+                <th>Traject</th>
                 <th>Bericht</th>
                 <th>Datum</th>
             </tr>
@@ -47,12 +47,13 @@
                     <td>{{ $submission->first_name }} {{ $submission->last_name }}</td>
                     <td>{{ $submission->email }}</td>
                     <td>{{ $submission->phone }}</td>
+                    <td>{{ $submission->trajectory }}</td>
                     <td class="msg">{{ $submission->message }}</td>
                     <td>{{ $submission->created_at?->format('Y-m-d H:i') }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">Nog geen inzendingen.</td>
+                    <td colspan="7">Nog geen inzendingen.</td>
                 </tr>
             @endforelse
         </tbody>

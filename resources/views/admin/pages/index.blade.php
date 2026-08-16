@@ -18,7 +18,9 @@
     <div class="top">
         <h1>Pagina beheer</h1>
         <div style="display:flex; gap:.5rem; align-items:center;">
+            <a class="button" href="{{ route('admin.dashboard') }}">Dashboard</a>
             <a class="button" href="{{ route('admin.contact-submissions.index') }}">Contact inzendingen</a>
+            <a class="button" href="{{ route('admin.apply-submissions.index') }}">Aanvraag inzendingen</a>
             <a class="button" href="{{ route('admin.pages.create') }}">Nieuwe pagina</a>
             <form method="POST" action="{{ route('admin.logout') }}" style="display:inline;">
                 @csrf

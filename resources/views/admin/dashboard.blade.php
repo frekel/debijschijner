@@ -34,6 +34,12 @@
                 <h2>Contact inzendingen</h2>
                 <p>Bekijk en exporteer contactformulier inzendingen</p>
             </a>
+
+            <a href="{{ route('admin.apply-submissions.index') }}" class="dashboard-card">
+                <div class="icon">📋</div>
+                <h2>Aanvraag inzendingen</h2>
+                <p>Bekijk en exporteer aanvraagformulier inzendingen</p>
+            </a>
         </div>
 
         <form method="POST" action="{{ route('admin.logout') }}" style="display:inline;">

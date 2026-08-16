@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ApplySubmissionAdminController;
 use App\Http\Controllers\Admin\ContactSubmissionAdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PageAdminController;
@@ -18,6 +19,9 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('contact-submissions', [ContactSubmissionAdminController::class, 'index'])->name('contact-submissions.index');
         Route::get('contact-submissions/export', [ContactSubmissionAdminController::class, 'export'])->name('contact-submissions.export');
+
+        Route::get('apply-submissions', [ApplySubmissionAdminController::class, 'index'])->name('apply-submissions.index');
+        Route::get('apply-submissions/export', [ApplySubmissionAdminController::class, 'export'])->name('apply-submissions.export');
 
         Route::get('pages', [PageAdminController::class, 'index'])->name('pages.index');
         Route::get('pages/create', [PageAdminController::class, 'create'])->name('pages.create');
