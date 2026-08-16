@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\ApplySubmissions\Tables;
 
-use Filament\Actions\Action;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class ApplySubmissionsTable
@@ -31,13 +30,6 @@ class ApplySubmissionsTable
                 TextColumn::make('trajectory')
                     ->label('Traject')
                     ->searchable(),
-                TextColumn::make('ip_address')
-                    ->label('IP Adres')
-                    ->searchable(),
-                IconColumn::make('contacted')
-                    ->label('Contacted')
-                    ->boolean()
-                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Ingediend')
                     ->dateTime('d-m-Y H:i')
@@ -47,20 +39,19 @@ class ApplySubmissionsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                IconColumn::make('contacted')
+                    ->label('Contacted')
+                    ->boolean()
+                    ->sortable()
+                    ->action(function ($record): void {
+                        $record->update(['contacted' => ! $record->contacted]);
+                    })
+                    ->tooltip(fn ($record): string => $record->contacted ? 'Klik om op niet gecontacteerd te zetten' : 'Klik om op gecontacteerd te zetten'),
             ])
             ->filters([
                 //
             ])
             ->toolbarActions([])
-            ->recordActions([
-                Action::make('toggleContacted')
-                    ->label(fn ($record): string => $record->contacted ? 'Markeer als niet gecontacteerd' : 'Markeer als gecontacteerd')
-                    ->color(fn ($record): string => $record->contacted ? 'gray' : 'success')
-                    ->icon(fn ($record): string => $record->contacted ? 'heroicon-o-x-circle' : 'heroicon-o-check-circle')
-                    ->requiresConfirmation()
-                    ->action(function ($record): void {
-                        $record->update(['contacted' => ! $record->contacted]);
-                    }),
-            ]);
+            ->recordActions([]);
     }
 }
