@@ -1,66 +1,56 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aanvraag inzendingen</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 2rem; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { border: 1px solid #ddd; padding: .6rem; text-align: left; vertical-align: top; }
-        th { background: #f5f5f5; }
-        a.button { display: inline-block; padding: .5rem .8rem; border: 1px solid #ccc; background: #fff; text-decoration: none; cursor: pointer; }
-        .top { display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; }
-        .controls { display: flex; gap: .5rem; align-items: center; }
-        .msg { max-width: 420px; white-space: pre-wrap; }
-    </style>
-</head>
-<body>
-    <div class="top">
-        <h1>Aanvraag inzendingen</h1>
-        <div class="controls">
-            <a class="button" href="{{ route('admin.dashboard') }}">Dashboard</a>
-            <a class="button" href="{{ route('admin.apply-submissions.export') }}">CSV export</a>
-            <form method="POST" action="{{ route('admin.logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit" style="padding: .5rem .8rem; border: 1px solid #ccc; background: #fff; cursor: pointer;">Uitloggen</button>
-            </form>
+@extends('admin.layout')
+
+@section('title', 'Aanvraag inzendingen')
+
+@section('content')
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Aanvraag inzendingen</h1>
+            <p class="text-gray-600 mt-2">Overzicht van alle aanvraagformulier inzendingen</p>
         </div>
+        <a href="{{ route('admin.apply-submissions.export') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+            📥 CSV Export
+        </a>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Naam</th>
-                <th>Email</th>
-                <th>Telefoon</th>
-                <th>Traject</th>
-                <th>Bericht</th>
-                <th>Datum</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($submissions as $submission)
+    <div class="bg-white rounded-lg shadow overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50 border-b border-gray-200">
                 <tr>
-                    <td>{{ $submission->id }}</td>
-                    <td>{{ $submission->first_name }} {{ $submission->last_name }}</td>
-                    <td>{{ $submission->email }}</td>
-                    <td>{{ $submission->phone }}</td>
-                    <td>{{ $submission->trajectory }}</td>
-                    <td class="msg">{{ $submission->message }}</td>
-                    <td>{{ $submission->created_at?->format('Y-m-d H:i') }}</td>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">ID</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Naam</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Email</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Telefoon</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Traject</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Bericht</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Datum</th>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="7">Nog geen inzendingen.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @forelse ($submissions as $submission)
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 text-sm text-gray-900">{{ $submission->id }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{ $submission->first_name }} {{ $submission->last_name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600"><a href="mailto:{{ $submission->email }}" class="text-blue-600 hover:underline">{{ $submission->email }}</a></td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{ $submission->phone }}</td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                                {{ $submission->trajectory }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-600 max-w-xs truncate" title="{{ $submission->message }}">{{ $submission->message }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ $submission->created_at?->format('d-m-Y H:i') }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="px-6 py-8 text-center text-gray-600">Nog geen inzendingen.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 
-    <div style="margin-top: 1rem;">
+    <div class="mt-6">
         {{ $submissions->links() }}
     </div>
-</body>
-</html>
+@endsection
