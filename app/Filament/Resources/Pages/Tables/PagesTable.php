@@ -15,6 +15,10 @@ class PagesTable
     {
         return $table
             ->columns([
+                IconColumn::make('is_published')
+                    ->label('Gepubliceerd')
+                    ->boolean()
+                    ->sortable(),
                 TextColumn::make('slug')
                     ->label('Slug')
                     ->searchable()
@@ -22,10 +26,6 @@ class PagesTable
                 TextColumn::make('title')
                     ->label('Titel')
                     ->searchable()
-                    ->sortable(),
-                IconColumn::make('is_published')
-                    ->label('Gepubliceerd')
-                    ->boolean()
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Gemaakt')

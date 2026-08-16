@@ -13,6 +13,14 @@ class ContactSubmissionsTable
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                IconColumn::make('contacted')
+                    ->label('Contacted')
+                    ->boolean()
+                    ->sortable()
+                    ->action(function ($record): void {
+                        $record->update(['contacted' => ! $record->contacted]);
+                    })
+                    ->tooltip(fn ($record): string => $record->contacted ? 'Klik om op niet gecontacteerd te zetten' : 'Klik om op gecontacteerd te zetten'),
                 TextColumn::make('first_name')
                     ->label('Voornaam')
                     ->searchable(),
@@ -36,14 +44,6 @@ class ContactSubmissionsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                IconColumn::make('contacted')
-                    ->label('Contacted')
-                    ->boolean()
-                    ->sortable()
-                    ->action(function ($record): void {
-                        $record->update(['contacted' => ! $record->contacted]);
-                    })
-                    ->tooltip(fn ($record): string => $record->contacted ? 'Klik om op niet gecontacteerd te zetten' : 'Klik om op gecontacteerd te zetten'),
             ])
             ->filters([
                 //
