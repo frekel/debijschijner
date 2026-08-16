@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ContactSubmissionAdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PageAdminController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\WpAssetController;
@@ -30,6 +31,7 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
 
 Route::get('/', [SitePageController::class, 'show']);
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/aanvraag', [ApplyController::class, 'submit'])->name('apply.submit');
 
 Route::get('wp-content/{path}', [WpAssetController::class, 'serveWpContent'])
     ->where('path', '.*');
