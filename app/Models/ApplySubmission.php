@@ -15,5 +15,10 @@ class ApplySubmission extends Model
         'message',
         'ip_address',
         'user_agent',
+        'contacted',
+    ];
+
+    protected $casts = [
+        'contacted' => 'boolean',
     ];
 }
