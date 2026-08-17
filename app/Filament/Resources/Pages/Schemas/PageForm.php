@@ -49,21 +49,6 @@ class PageForm
                         Builder::make('content_blocks')
                             ->label('Inhoudsblokken')
                             ->blocks([
-                                Block::make('hero')
-                                    ->label('Hero')
-                                    ->schema([
-                                        TextInput::make('heading')
-                                            ->label('Kop')
-                                            ->required(),
-                                        Textarea::make('subheading')
-                                            ->label('Subkop')
-                                            ->rows(3),
-                                        TextInput::make('button_text')
-                                            ->label('Knop tekst'),
-                                        TextInput::make('button_url')
-                                            ->label('Knop URL')
-                                            ->url(),
-                                    ]),
                                 Block::make('rich_text')
                                     ->label('Tekst')
                                     ->schema([
@@ -122,23 +107,6 @@ class PageForm
                                             ->inline()
                                             ->live(),
                                     ]),
-                                Block::make('cta')
-                                    ->label('Call to Action')
-                                    ->schema([
-                                        TextInput::make('heading')
-                                            ->label('Kop')
-                                            ->required(),
-                                        Textarea::make('text')
-                                            ->label('Tekst')
-                                            ->rows(3),
-                                        TextInput::make('button_text')
-                                            ->label('Knop tekst')
-                                            ->required(),
-                                        TextInput::make('button_url')
-                                            ->label('Knop URL')
-                                            ->required()
-                                            ->url(),
-                                    ]),
                                 Block::make('quote')
                                     ->label('Quote')
                                     ->schema([
@@ -151,18 +119,6 @@ class PageForm
                                             ->label('Auteur')
                                             ->required()
                                             ->helperText('Bijv: Alexandra Trenfor'),
-                                    ]),
-                                Block::make('html')
-                                    ->label('Custom HTML')
-                                    ->schema([
-                                        TextInput::make('heading')
-                                            ->label('Kop (optioneel)')
-                                            ->helperText('Alleen voor referentie in editor'),
-                                        Textarea::make('code')
-                                            ->label('HTML Code')
-                                            ->required()
-                                            ->rows(15)
-                                            ->helperText('Plak hier je complete HTML-code'),
                                     ]),
                             ])
                             ->addActionLabel('Blok toevoegen')
