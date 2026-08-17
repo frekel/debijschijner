@@ -1,5 +1,5 @@
 <section class="cms-section cms-quote">
-    <div class="cms-container grid-container">
+    <div class="cms-container">
         <div class="element element-icon">
             <div class="element-icon-box"><i class="fas fa-quote-left"></i></div>
         </div>
@@ -19,3 +19,5 @@
         @endif
     </div>
 </section>
+
+<div class="clearfix"><br/></div>

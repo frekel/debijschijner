@@ -13,29 +13,6 @@ use Throwable;
 
 class SitePageController extends Controller
 {
-    public function showOverMijBlade(): Response
-    {
-        try {
-            $page = Page::query()
-                ->where('slug', 'over-mij')
-                ->first();
-        } catch (Throwable) {
-            $page = null;
-        }
-
-        $html = view('cms.templates.over-mij', [
-            'page' => $page,
-            'title' => $page?->meta_title ?: ($page?->title ?: 'Over mij'),
-            'metaDescription' => $page?->meta_description,
-            'canonicalUrl' => $page?->canonical_url,
-            'ogImage' => $this->resolvePublicUrl($page?->og_image),
-        ])->render();
-
-        return response($html, 200, [
-            'Content-Type' => 'text/html; charset=UTF-8',
-        ]);
-    }
-
     public function show(string $path = ''): Response
     {
         $normalizedPath = trim($path, '/');

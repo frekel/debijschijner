@@ -678,25 +678,25 @@
             }
         }
 
-        #section-3b86120e-0a57-494e-a3c0-a1e3138eee51 .single-item .single-item-desc {
+        #section-3b86120e-0a57-494e-a3c0-a1e3138eee51 .single-item .cms-richtext {
             color: #838383;
             font-size: 16px;
             line-height: 2
         }
 
         @media only screen and (min-width: 768px) {
-            #section-3b86120e-0a57-494e-a3c0-a1e3138eee51 .single-item .single-item-desc {
+            #section-3b86120e-0a57-494e-a3c0-a1e3138eee51 .single-item .cms-richtext {
                 font-size: 18px
             }
         }
 
         @media only screen and (min-width: 992px) {
-            #section-3b86120e-0a57-494e-a3c0-a1e3138eee51 .single-item .single-item-desc {
+            #section-3b86120e-0a57-494e-a3c0-a1e3138eee51 .single-item .cms-richtext {
                 font-size: 18px
             }
         }
 
-        #section-3b86120e-0a57-494e-a3c0-a1e3138eee51 .single-item-image-box {
+        #section-3b86120e-0a57-494e-a3c0-a1e3138eee51 .cms-image {
             margin: 0 0 30px 0
         }
 
@@ -751,7 +751,7 @@
 
 /* block 10 */
 
-[class*='wp-block-']{color:rgba(255,255,255,1)}[class*='wp-block-'] a{color:rgba(251,197,49,1)}[class*='wp-block-'] a:hover{color:rgba(247,184,13,1)}#section-g-v03mrwo .section-title .title{color:#fbc531}@media only screen and (min-width:992px){#section-g-v03mrwo .section-title .title{margin:30px 0 0 15px}}@media only screen and (min-width:992px){#section-g-v03mrwo .grid-item-wrap{margin:0 0 0 0}}#section-g-v03mrwo{background-color:#2d2d2d;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px}@media only screen and (min-width:992px){#section-g-v03mrwo{height:200px}}#section-g-v03mrwo .single-item .single-item-desc{color:#ffffff}
+[class*='wp-block-']{color:rgba(255,255,255,1)}[class*='wp-block-'] a{color:rgba(251,197,49,1)}[class*='wp-block-'] a:hover{color:rgba(247,184,13,1)}#section-g-v03mrwo .section-title .title{color:#fbc531}@media only screen and (min-width:992px){#section-g-v03mrwo .section-title .title{margin:30px 0 0 15px}}@media only screen and (min-width:992px){#section-g-v03mrwo .grid-item-wrap{margin:0 0 0 0}}#section-g-v03mrwo{background-color:#2d2d2d;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px}@media only screen and (min-width:992px){#section-g-v03mrwo{height:200px}}#section-g-v03mrwo .single-item .cms-richtext{color:#ffffff}
 
 
 /* block 11 */
@@ -759,3 +759,26 @@
 #section-07c12c9c-d70e-4faa-8898-7253e666fc41 .section-title .title{color:#fbc531}@media only screen and (min-width:992px){#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .section-title .title{margin:0 0 10px 0}}#section-07c12c9c-d70e-4faa-8898-7253e666fc41{background-color:#2d2d2d;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px;padding:20px 0 20px 0}@media only screen and (min-width:768px){#section-07c12c9c-d70e-4faa-8898-7253e666fc41{padding:20px 0 20px 0}}@media only screen and (min-width:992px){#section-07c12c9c-d70e-4faa-8898-7253e666fc41{height:200px;padding:20px 0 20px 0}}#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .single-item{background:#2d2d2d;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;border-bottom-left-radius:5px;margin:0 11px 0 11px}#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .single-item:hover{background:#2d2d2d;border-color:rgba(251,197,49,1)}@media only screen and (min-width:768px){#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .single-item{margin:0 13px 0 13px}}@media only screen and (min-width:992px){#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .single-item{margin:0 10px 0 10px;padding:0 0 0 0}}#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .single-item .single-item-icon-box{font-size:36px;color:#ffffff}#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .single-item .single-item-icon-box .social-icon{color:#ffffff}#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .single-item:hover .single-item-icon-box{color:#f7b80d}#section-07c12c9c-d70e-4faa-8898-7253e666fc41 .single-item .single-item-icon-box .social-icon:hover{color:#f7b80d}
 
 
+.cms-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cms-quote {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.cms-richtext {
+    color: #838383;
+    font-size: 18px;
+    line-height: 2;
+}
+
+.cms-image-text {
+    background-color: #fcfcfc;
+    padding: 15px;
+}

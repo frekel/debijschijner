@@ -8,7 +8,7 @@
                                 <div class="widget wp-block-widget">
                                     <section id="section-g-v03mrwo"
                                              class="wp-block-content-box section content-box-wrapper content-template1 has-color-bg has-custom-bg">
-                                        <div class="grid-container">
+                                        <div class="cms-container">
                                             <div class="block-header">
                                                 <div class="section-title"><h3 class="title">Debora
                                                     van der Stad</h3></div>
@@ -17,8 +17,8 @@
                                                 <div class="grid-column grid-lg-12 grid-md-4 grid-12">
                                                     <div class="single-item single-item-0">
                                                         <div class="single-item-wrap">
-                                                            <div class="single-item-content"><p
-                                                                class="single-item-desc">Zuidgors 20<br>2134WE
+                                                            <div class="cms-copy"><p
+                                                                class="cms-richtext">Zuidgors 20<br>2134WE
                                                                 Hoofddorp<br>06-24881874<br><a
                                                                     href="mailto:debora@debijschijner.nl">debora@debijschijner.nl</a><br>kvk:
                                                                 95218661</p></div>
@@ -48,7 +48,7 @@
                                 <div class="widget wp-block-widget">
                                     <div id="section-07c12c9c-d70e-4faa-8898-7253e666fc41"
                                          class="wp-block-social alignwide section social social-template1 has-color-bg has-custom-bg">
-                                        <div class="grid-container">
+                                        <div class="cms-container">
                                             <div class="block-header">
                                                 <div class="section-title text-center"><h3
                                                     class="title">Socials</h3></div>
@@ -56,7 +56,7 @@
                                             <div class="inline-wrapper grid-item-wrap">
                                                 <div class="grid-column social-item">
                                                     <div class="single-item single-item-0">
-                                                        <div class="single-item-content">
+                                                        <div class="cms-copy">
                                                             <div class="single-item-icon-box"><a
                                                                 class="social-icon" href="#facebooklink"><i
                                                                 class="fab fa-facebook-f"></i></a></div>
@@ -65,7 +65,7 @@
                                                 </div>
                                                 <div class="grid-column social-item">
                                                     <div class="single-item single-item-1">
-                                                        <div class="single-item-content">
+                                                        <div class="cms-copy">
                                                             <div class="single-item-icon-box"><a
                                                                 class="social-icon"
                                                                 href="https://www.linkedin.com/in/debora-van-der-stad/"><i
@@ -75,7 +75,7 @@
                                                 </div>
                                                 <div class="grid-column social-item">
                                                     <div class="single-item single-item-2">
-                                                        <div class="single-item-content">
+                                                        <div class="cms-copy">
                                                             <div class="single-item-icon-box"><a
                                                                 class="social-icon" href="#instragram"><i
                                                                 class="fab fa-instagram"></i></a></div>
@@ -84,7 +84,7 @@
                                                 </div>
                                                 <div class="grid-column social-item">
                                                     <div class="single-item single-item-3">
-                                                        <div class="single-item-content">
+                                                        <div class="cms-copy">
                                                             <div class="single-item-icon-box"><a
                                                                 class="social-icon" href="#youtube"><i
                                                                 class="fab fa-youtube"></i></a></div>

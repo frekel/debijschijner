@@ -7,8 +7,6 @@ use App\Http\Controllers\WpAssetController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SitePageController::class, 'show']);
-Route::get('/over-mij-blade', [SitePageController::class, 'showOverMijBlade'])
-    ->name('over-mij.blade.preview');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 Route::post('/aanvraag', [ApplyController::class, 'submit'])->name('apply.submit');
 
