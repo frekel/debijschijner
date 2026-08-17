@@ -139,3 +139,88 @@ var consent_api = {"consent_type":"","waitfor_consent_hook":"","cookie_expiratio
 
 // Gutentor Config
 var gutentorLS = {"fontAwesomeVersion":"5","restNonce":"85ac916484","restUrl":"https:\/\/debijschijner.nl\/wp-json\/"};
+
+document.addEventListener('DOMContentLoaded', function () {
+    var carousels = document.querySelectorAll('[data-review-carousel]');
+
+    carousels.forEach(function (carousel) {
+        var viewport = carousel.querySelector('.reviews-viewport');
+        var track = carousel.querySelector('.reviews-track');
+        var prevButton = carousel.querySelector('[data-review-prev]');
+        var nextButton = carousel.querySelector('[data-review-next]');
+        var cards = track ? track.querySelectorAll('.review-card') : [];
+        var index = 0;
+
+        if (!viewport || !track || !prevButton || !nextButton || cards.length === 0) {
+            return;
+        }
+
+        var visibleCount = function () {
+            if (window.innerWidth <= 640) {
+                return 1;
+            }
+
+            if (window.innerWidth <= 991) {
+                return 2;
+            }
+
+            return 3;
+        };
+
+        var maxIndex = function () {
+            return Math.max(0, cards.length - visibleCount());
+        };
+
+        var stepWidth = function () {
+            if (cards.length === 0) {
+                return 0;
+            }
+
+            var styles = window.getComputedStyle(track);
+            var gap = parseFloat(styles.gap || styles.columnGap || '0') || 0;
+            var cardWidth = cards[0].getBoundingClientRect().width;
+
+            if (cardWidth === 0) {
+                cardWidth = viewport.getBoundingClientRect().width / visibleCount();
+            }
+
+            return cardWidth + gap;
+        };
+
+        var update = function () {
+            var max = maxIndex();
+
+            if (index > max) {
+                index = 0;
+            }
+
+            var offset = stepWidth() * index;
+            track.style.transform = 'translateX(-' + offset + 'px)';
+        };
+
+        prevButton.addEventListener('click', function () {
+            var max = maxIndex();
+
+            if (max === 0) {
+                return;
+            }
+
+            index = index <= 0 ? max : index - 1;
+            update();
+        });
+
+        nextButton.addEventListener('click', function () {
+            var max = maxIndex();
+
+            if (max === 0) {
+                return;
+            }
+
+            index = index >= max ? 0 : index + 1;
+            update();
+        });
+
+        window.addEventListener('resize', update);
+        update();
+    });
+});

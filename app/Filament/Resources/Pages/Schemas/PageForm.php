@@ -36,6 +36,7 @@ class PageForm
                             ->options([
                                 'default' => 'Default',
                                 'homepage' => 'Homepage',
+                                'full_screen' => 'Full screen',
                             ])
                             ->default('default')
                             ->required()
@@ -130,7 +131,7 @@ class PageForm
                                             ->required()
                                             ->helperText('Bijv: Alexandra Trenfor'),
                                     ]),
-                                Block::make('beeldbegeleiding')
+                                Block::make('homepage_post')
                                     ->label('Homepage tekst')
                                     ->schema([
                                         TextInput::make('title')
@@ -147,8 +148,49 @@ class PageForm
                                         TextInput::make('title')
                                             ->label('Title')
                                             ->required(),
+                                        TextInput::make('time')
+                                            ->label('Time')
+                                            ->helperText('Bijv: 45 min, 1 uur, 60 - 90 min (optioneel)'),
                                         Textarea::make('text')
                                             ->label('Text')
+                                            ->rows(6)
+                                            ->required(),
+                                    ]),
+                                Block::make('prices')
+                                    ->label('Prices')
+                                    ->schema([
+                                        TextInput::make('price')
+                                            ->label('Prijs')
+                                            ->required(),
+                                        TextInput::make('title')
+                                            ->label('Titel')
+                                            ->required(),
+                                        Textarea::make('text')
+                                            ->label('Text')
+                                            ->rows(6)
+                                            ->required(),
+                                    ]),
+                                Block::make('review')
+                                    ->label('Review')
+                                    ->schema([
+                                        TextInput::make('reviewer_name')
+                                            ->label('Naam reviewer')
+                                            ->required(),
+                                        TextInput::make('button_text')
+                                            ->label('Button tekst')
+                                            ->helperText('Tekst onder de naam reviewer (optioneel).'),
+                                        TextInput::make('title')
+                                            ->label('Kop')
+                                            ->required(),
+                                        FileUpload::make('image')
+                                            ->label('Afbeelding')
+                                            ->image()
+                                            ->disk('public_uploads')
+                                            ->directory(fn (): string => now()->format('Y/m'))
+                                            ->preserveFilenames()
+                                            ->required(),
+                                        Textarea::make('text')
+                                            ->label('Tekst')
                                             ->rows(6)
                                             ->required(),
                                     ]),

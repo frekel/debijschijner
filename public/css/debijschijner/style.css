@@ -1509,6 +1509,11 @@ object {
     width: 90%;
 }
 
+.site-content-full-screen {
+    margin: 0 auto;
+    width: 98%;
+}
+
 #primary {
     float: left;
     width: 69.5%;
@@ -1525,6 +1530,9 @@ object {
 @media only screen and (max-width: 1170px){
     .site-content{
         width: 96%;
+    }
+    .site-content-full-screen {
+        width: 92%; 
     }
 }
 
@@ -2087,6 +2095,10 @@ article.page .read-more {
     }
 
     .site-content {
+        margin-top: 0;
+    }
+
+    .site-content-full-screen {
         margin-top: 0;
     }
 

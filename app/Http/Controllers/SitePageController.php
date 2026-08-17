@@ -6,8 +6,6 @@ use App\Models\Page;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\MessageBag;
-use Illuminate\Support\ViewErrorBag;
 use Illuminate\Support\Str;
 use Throwable;
 
@@ -102,15 +100,120 @@ class SitePageController extends Controller
     private function renderBlocks(array $blocks): string
     {
         $html = '';
+        $processPostIndex = 0;
+        $processPostItems = '';
+        $pricesItems = '';
+        $reviewItems = '';
 
         foreach ($blocks as $block) {
-            $html .= $this->renderBlock($block);
+            $type = $block['type'] ?? '';
+
+            if ($type === 'process_post') {
+                if ($pricesItems !== '') {
+                    $html .= $this->renderPricesGroup($pricesItems);
+                    $pricesItems = '';
+                }
+
+                if ($reviewItems !== '') {
+                    $html .= $this->renderReviewsGroup($reviewItems);
+                    $reviewItems = '';
+                }
+
+                $data = is_array($block['data'] ?? null) ? $block['data'] : [];
+                $processPostItems .= $this->renderProcessPostBlock($data, $processPostIndex++);
+
+                continue;
+            }
+
+            if ($type === 'prices') {
+                if ($processPostItems !== '') {
+                    $html .= $this->renderProcessPostGroup($processPostItems);
+                    $processPostItems = '';
+                }
+
+                if ($reviewItems !== '') {
+                    $html .= $this->renderReviewsGroup($reviewItems);
+                    $reviewItems = '';
+                }
+
+                $data = is_array($block['data'] ?? null) ? $block['data'] : [];
+                $pricesItems .= $this->renderPricesBlock($data);
+
+                continue;
+            }
+
+            if ($type === 'review') {
+                if ($processPostItems !== '') {
+                    $html .= $this->renderProcessPostGroup($processPostItems);
+                    $processPostItems = '';
+                }
+
+                if ($pricesItems !== '') {
+                    $html .= $this->renderPricesGroup($pricesItems);
+                    $pricesItems = '';
+                }
+
+                $data = is_array($block['data'] ?? null) ? $block['data'] : [];
+                $reviewItems .= $this->renderReviewBlock($data);
+
+                continue;
+            }
+
+            if ($processPostItems !== '') {
+                $html .= $this->renderProcessPostGroup($processPostItems);
+                $processPostItems = '';
+            }
+
+            if ($pricesItems !== '') {
+                $html .= $this->renderPricesGroup($pricesItems);
+                $pricesItems = '';
+            }
+
+            if ($reviewItems !== '') {
+                $html .= $this->renderReviewsGroup($reviewItems);
+                $reviewItems = '';
+            }
+
+            $html .= $this->renderBlock($block, $processPostIndex);
+        }
+
+        if ($processPostItems !== '') {
+            $html .= $this->renderProcessPostGroup($processPostItems);
+        }
+
+        if ($pricesItems !== '') {
+            $html .= $this->renderPricesGroup($pricesItems);
+        }
+
+        if ($reviewItems !== '') {
+            $html .= $this->renderReviewsGroup($reviewItems);
         }
 
         return $html;
     }
 
-    private function renderBlock(array $block): string
+    private function renderProcessPostGroup(string $itemsHtml): string
+    {
+        return view('cms.groups.process-post', [
+            'itemsHtml' => $itemsHtml,
+        ])->render();
+    }
+
+    private function renderPricesGroup(string $itemsHtml): string
+    {
+        return view('cms.groups.prices', [
+            'itemsHtml' => $itemsHtml,
+        ])->render();
+    }
+
+    private function renderReviewsGroup(string $itemsHtml): string
+    {
+        return view('cms.groups.reviews', [
+            'itemsHtml' => $itemsHtml,
+        ])->render();
+    }
+
+    private function renderBlock(array $block, int &$processPostIndex): string
     {
         $type = $block['type'] ?? '';
         $data = is_array($block['data'] ?? null) ? $block['data'] : [];
@@ -119,8 +222,10 @@ class SitePageController extends Controller
             'rich_text' => $this->renderRichTextBlock($data),
             'image_text' => $this->renderImageTextBlock($data),
             'quote' => $this->renderQuoteBlock($data),
-            'beeldbegeleiding' => $this->renderBeeldbegeleidingBlock($data),
-            'process_post' => $this->renderProcessPostBlock($data),
+            'homepage_post' => $this->renderHomePagePostBlock($data),
+            'process_post' => $this->renderProcessPostBlock($data, $processPostIndex++),
+            'prices' => $this->renderPricesBlock($data),
+            'review' => $this->renderReviewBlock($data),
             default => '',
         };
     }
@@ -169,7 +274,7 @@ class SitePageController extends Controller
         ])->render();
     }
 
-    private function renderBeeldbegeleidingBlock(array $data): string
+    private function renderHomePagePostBlock(array $data): string
     {
         return view('cms.blocks.homepage-tekst', [
             'title' => (string) ($data['title'] ?? ''),
@@ -177,10 +282,33 @@ class SitePageController extends Controller
         ])->render();
     }
 
-    private function renderProcessPostBlock(array $data): string
+    private function renderProcessPostBlock(array $data, int $index): string
     {
         return view('cms.blocks.process-post', [
             'title' => (string) ($data['title'] ?? ''),
+            'time' => trim((string) ($data['time'] ?? '')),
+            'text' => (string) ($data['text'] ?? ''),
+            'itemIndex' => $index,
+            'parityClass' => $index % 2 === 0 ? 'odd timeline-right' : 'even timeline-left',
+        ])->render();
+    }
+
+    private function renderPricesBlock(array $data): string
+    {
+        return view('cms.blocks.prices', [
+            'price' => trim((string) ($data['price'] ?? '')),
+            'title' => (string) ($data['title'] ?? ''),
+            'text' => (string) ($data['text'] ?? ''),
+        ])->render();
+    }
+
+    private function renderReviewBlock(array $data): string
+    {
+        return view('cms.blocks.review', [
+            'reviewerName' => trim((string) ($data['reviewer_name'] ?? '')),
+            'buttonText' => trim((string) ($data['button_text'] ?? '')),
+            'title' => (string) ($data['title'] ?? ''),
+            'image' => $this->resolvePublicUrl((string) ($data['image'] ?? '')),
             'text' => (string) ($data['text'] ?? ''),
         ])->render();
     }
@@ -210,6 +338,7 @@ class SitePageController extends Controller
     {
         return match ($template) {
             'homepage' => 'cms.layouts.homepage',
+            'full_screen' => 'cms.layouts.full-screen',
             default => 'cms.layouts.default',
         };
     }
@@ -352,34 +481,7 @@ class SitePageController extends Controller
 
     private function buildContactFeedbackHtml(): string
     {
-        $chunks = [];
-
-        $success = session('contact_success');
-
-        if (is_string($success) && $success !== '') {
-            $chunks[] = sprintf(
-                '<div style="margin:16px 0;padding:12px 16px;border:1px solid #2e7d32;background:#e8f5e9;color:#1b5e20;border-radius:4px;">%s</div>',
-                e($success)
-            );
-        }
-
-        $errors = session('errors');
-
-        if ($errors instanceof ViewErrorBag) {
-            $errorBag = $errors->getBag('default');
-
-            if ($errorBag instanceof MessageBag && $errorBag->any()) {
-                $listItems = collect($errorBag->all())
-                    ->map(fn (string $message) => '<li>'.e($message).'</li>')
-                    ->implode('');
-
-                $chunks[] = '<div style="margin:16px 0;padding:12px 16px;border:1px solid #c62828;background:#ffebee;color:#b71c1c;border-radius:4px;">'
-                    .'<strong>Controleer het formulier:</strong><ul style="margin:8px 0 0 20px;">'.$listItems.'</ul>'
-                    .'</div>';
-            }
-        }
-
-        return implode('', $chunks);
+        return $this->renderFormFeedbackHtml('contact_success');
     }
 
     private function decorateApplyPageHtml(string $html): string
@@ -435,33 +537,31 @@ class SitePageController extends Controller
 
     private function buildApplyFeedbackHtml(): string
     {
-        $chunks = [];
+        return $this->renderFormFeedbackHtml('apply_success');
+    }
 
-        $success = session('apply_success');
-
-        if (is_string($success) && $success !== '') {
-            $chunks[] = sprintf(
-                '<div style="margin:16px 0;padding:12px 16px;border:1px solid #2e7d32;background:#e8f5e9;color:#1b5e20;border-radius:4px;">%s</div>',
-                e($success)
-            );
-        }
+    private function renderFormFeedbackHtml(string $successSessionKey): string
+    {
+        $success = session($successSessionKey);
+        $successMessage = is_string($success) ? trim($success) : '';
 
         $errors = session('errors');
+        $errorMessages = [];
 
-        if ($errors instanceof ViewErrorBag) {
-            $errorBag = $errors->getBag('default');
-
-            if ($errorBag instanceof MessageBag && $errorBag->any()) {
-                $listItems = collect($errorBag->all())
-                    ->map(fn (string $message) => '<li>'.e($message).'</li>')
-                    ->implode('');
-
-                $chunks[] = '<div style="margin:16px 0;padding:12px 16px;border:1px solid #c62828;background:#ffebee;color:#b71c1c;border-radius:4px;">'
-                    .'<strong>Controleer het formulier:</strong><ul style="margin:8px 0 0 20px;">'.$listItems.'</ul>'
-                    .'</div>';
-            }
+        if ($errors instanceof \Illuminate\Support\ViewErrorBag) {
+            $errorMessages = $errors->getBag('default')->all();
+        } elseif (is_object($errors) && method_exists($errors, 'all')) {
+            $errorMessages = $errors->all();
         }
 
-        return implode('', $chunks);
+        if ($successMessage === '' && count($errorMessages) === 0) {
+            return '';
+        }
+
+        return view('cms.partials.form-feedback', [
+            'successMessage' => $successMessage,
+            'errorMessages' => $errorMessages,
+            'errorTitle' => 'Controleer het formulier:',
+        ])->render();
     }
 }
