@@ -1,6 +1,6 @@
 <div class="site" id="page">
     <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
-    <div class="navbar navbar-fixed-top  at-inner-nav " id="navbar" role="navigation">
+    <div class="navbar navbar-fixed-top at-inner-nav" id="navbar" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i

@@ -6,7 +6,7 @@
                         <div class="footer-sidebar col-sm-3">
                             <aside id="gutentor_wp_block_widget-4" class="widget widget_gutentor_wp_block_widget">
                                 <div class="widget wp-block-widget">
-                                    <section id="section-g-v03mrwo"
+                                    <section
                                              class="wp-block-content-box section content-box-wrapper content-template1 has-color-bg has-custom-bg">
                                         <div class="grid-container">
                                             <div class="block-header">
@@ -46,7 +46,7 @@
                         <div class="footer-sidebar col-sm-3">
                             <aside id="gutentor_wp_block_widget-3" class="widget widget_gutentor_wp_block_widget">
                                 <div class="widget wp-block-widget">
-                                    <div id="section-07c12c9c-d70e-4faa-8898-7253e666fc41"
+                                    <div
                                          class="wp-block-social alignwide section social social-template1 has-color-bg has-custom-bg">
                                         <div class="grid-container">
                                             <div class="block-header">

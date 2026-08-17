@@ -139,6 +139,19 @@ class PageForm
                                             ->required()
                                             ->url(),
                                     ]),
+                                Block::make('quote')
+                                    ->label('Quote')
+                                    ->schema([
+                                        Textarea::make('quote_text')
+                                            ->label('Quote tekst')
+                                            ->rows(4)
+                                            ->required()
+                                            ->helperText('Bijv: De beste leraren zijn degene die je laten zien waar te kijken, maar niet vertellen wat te zien.'),
+                                        TextInput::make('quote_author')
+                                            ->label('Auteur')
+                                            ->required()
+                                            ->helperText('Bijv: Alexandra Trenfor'),
+                                    ]),
                                 Block::make('html')
                                     ->label('Custom HTML')
                                     ->schema([

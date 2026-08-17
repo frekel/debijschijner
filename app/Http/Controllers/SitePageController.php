@@ -142,6 +142,7 @@ class SitePageController extends Controller
             'rich_text' => $this->renderRichTextBlock($data),
             'image_text' => $this->renderImageTextBlock($data),
             'cta' => $this->renderCtaBlock($data),
+            'quote' => $this->renderQuoteBlock($data),
             'html' => $this->renderHtmlBlock($data),
             default => '',
         };
@@ -149,81 +150,74 @@ class SitePageController extends Controller
 
     private function renderHeroBlock(array $data): string
     {
-        $heading = e((string) ($data['heading'] ?? ''));
-        $subheading = e((string) ($data['subheading'] ?? ''));
-        $buttonText = e((string) ($data['button_text'] ?? ''));
-        $buttonUrl = e((string) ($data['button_url'] ?? '#'));
-
-        return '<section class="cms-section cms-hero">'
-            .'<div class="cms-container">'
-            .'<h1>'.$heading.'</h1>'
-            .($subheading !== '' ? '<p class="cms-subheading">'.$subheading.'</p>' : '')
-            .($buttonText !== '' ? '<p><a class="cms-button" href="'.$buttonUrl.'">'.$buttonText.'</a></p>' : '')
-            .'</div>'
-            .'</section>';
+        return view('cms.blocks.hero', [
+            'heading' => (string) ($data['heading'] ?? ''),
+            'subheading' => (string) ($data['subheading'] ?? ''),
+            'buttonText' => (string) ($data['button_text'] ?? ''),
+            'buttonUrl' => (string) ($data['button_url'] ?? '#'),
+        ])->render();
     }
 
     private function renderRichTextBlock(array $data): string
     {
-        $heading = e((string) ($data['heading'] ?? ''));
         $editorMode = (string) ($data['editor_mode'] ?? 'wysiwyg');
         $body = $editorMode === 'html'
             ? (string) ($data['body_html'] ?? '')
             : (string) ($data['body'] ?? '');
 
-        return '<section class="cms-section">'
-            .'<div class="cms-container">'
-            .($heading !== '' ? '<h2>'.$heading.'</h2>' : '')
-            .'<div class="cms-richtext">'.$body.'</div>'
-            .'</div>'
-            .'</section>';
+        return view('cms.blocks.rich-text', [
+            'heading' => (string) ($data['heading'] ?? ''),
+            'body' => $body,
+        ])->render();
     }
 
     private function renderImageTextBlock(array $data): string
     {
         $image = $this->resolvePublicUrl((string) ($data['image'] ?? ''));
-        $alt = e((string) ($data['alt'] ?? ''));
-        $heading = e((string) ($data['heading'] ?? ''));
         $editorMode = (string) ($data['editor_mode'] ?? 'wysiwyg');
         $body = $editorMode === 'html'
             ? (string) ($data['body_html'] ?? '')
             : (string) ($data['body'] ?? '');
 
-        return '<section class="cms-section">'
-            .'<div class="cms-container cms-image-text">'
-            .($image ? '<div class="cms-image"><img src="'.e($image).'" alt="'.$alt.'"></div>' : '')
-            .'<div class="cms-copy">'
-            .($heading !== '' ? '<h2>'.$heading.'</h2>' : '')
-            .'<div class="cms-richtext">'.$body.'</div>'
-            .'</div>'
-            .'</div>'
-            .'</section>';
+        return view('cms.blocks.image-text', [
+            'image' => $image,
+            'alt' => (string) ($data['alt'] ?? ''),
+            'heading' => (string) ($data['heading'] ?? ''),
+            'body' => $body,
+        ])->render();
     }
 
     private function renderCtaBlock(array $data): string
     {
-        $heading = e((string) ($data['heading'] ?? ''));
-        $text = e((string) ($data['text'] ?? ''));
-        $buttonText = e((string) ($data['button_text'] ?? ''));
-        $buttonUrl = e((string) ($data['button_url'] ?? '#'));
+        return view('cms.blocks.cta', [
+            'heading' => (string) ($data['heading'] ?? ''),
+            'text' => (string) ($data['text'] ?? ''),
+            'buttonText' => (string) ($data['button_text'] ?? ''),
+            'buttonUrl' => (string) ($data['button_url'] ?? '#'),
+        ])->render();
+    }
 
-        return '<section class="cms-section cms-cta">'
-            .'<div class="cms-container">'
-            .'<h2>'.$heading.'</h2>'
-            .($text !== '' ? '<p>'.$text.'</p>' : '')
-            .($buttonText !== '' ? '<p><a class="cms-button" href="'.$buttonUrl.'">'.$buttonText.'</a></p>' : '')
-            .'</div>'
-            .'</section>';
+    private function renderQuoteBlock(array $data): string
+    {
+        $quoteText = trim((string) ($data['quote_text'] ?? ''));
+        $quoteAuthor = trim((string) ($data['quote_author'] ?? ''));
+
+        if ($quoteText === '' && $quoteAuthor === '') {
+            return '';
+        }
+
+        return view('cms.blocks.quote', [
+            'quoteText' => $quoteText,
+            'quoteAuthor' => $quoteAuthor,
+        ])->render();
     }
 
     private function renderHtmlBlock(array $data): string
     {
-        $heading = (string) ($data['heading'] ?? '');
-        $code = (string) ($data['code'] ?? '');
-
-        // Render raw HTML code as-is (not escaped)
-        return ($heading !== '' ? '<div class="cms-section"><h2>'.e($heading).'</h2></div>' : '')
-            . '<div class="cms-section cms-html-block">'.$code.'</div>';
+        return view('cms.blocks.html', [
+            'heading' => (string) ($data['heading'] ?? ''),
+            'code' => (string) ($data['code'] ?? ''),
+        ])->render();
     }
 
     private function resolvePublicUrl(?string $path): ?string
