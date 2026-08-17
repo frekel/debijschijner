@@ -2,30 +2,30 @@
 
 @section('content')
 
-    <div class="wrapper inner-main-title">
+    <div class="inner-main-title">
         <header class="entry-header">
             <h1 class="entry-title">Over mij</h1></header><!-- .entry-header -->
     </div>
     <div id="content" class="site-content">
-        <div id="primary" class="content-area">
+        <div id="primary" >
             <main id="main" class="site-main" role="main">
-                <article id="post-64" class="post-64 page type-page status-publish hentry">
+                <article id="post-64" class="hentry">
                     <div class="single-feat clearfix"></div><!-- .single-feat-->
                     <div class="content-wrapper">
                         <div class="entry-content">
 
-                            <div class="block-columns is-layout-flex container-core-columns-is-layout-1 block-columns-is-layout-flex">
-                                <div class="block-column is-layout-flow block-column-is-layout-flow" style="flex-basis:100%">
+                            <div class="block-columns is-layout-flex container-core-columns-is-layout-1">
+                                <div  style="flex-basis:100%">
                                     <div class="block-group alignwide">
-                                        <div class="block-group__inner-container is-layout-constrained block-group-is-layout-constrained">
-                                            <div class="block-m12 section-gf8ca71 module module-quote">
-                                                <section id="g-eod5ffc" class="block-m3 section-g-eod5ffc module container-cover">
+                                        <div >
+                                            <div class="module">
+                                                <section id="g-eod5ffc" class="section-g-eod5ffc module">
                                                     <div class="grid-container">
-                                                        <div class="block-e5 section-g-02r26w7 element element-icon icon-default">
+                                                        <div class="section-g-02r26w7 element element-icon">
                                                             <div class="element-icon-box"><i class="fas fa-quote-left"></i></div>
                                                         </div>
 
-                                                        <div class="block-e1 section-g-uw1ztuj element element-advanced-text">
+                                                        <div class="section-g-uw1ztuj element element-advanced-text">
                                                             <div class="text-wrap">
                                                                 <div class="text"><br>De beste leraren zijn degene die je laten zien waar te kijken, maar niet vertellen wat te zien
                                                                 </div>
@@ -33,7 +33,7 @@
                                                         </div>
 
                                                         <div
-                                                            class="block-e1 section-g-vnbafnj element element-advanced-text">
+                                                            class="section-g-vnbafnj element element-advanced-text">
                                                             <div class="text-wrap"><p class="text">Alexandra Trenfor</p></div>
                                                         </div>
                                                     </div>
@@ -44,12 +44,12 @@
 
 
                                     <section
-                                        class="block-about-block alignfull section about about-template1 has-color-bg has-custom-bg">
+                                        class="alignfull section about">
                                         <div class="grid-container">
                                             <div class="grid-item-wrap">
                                                 <div class="single-item">
                                                     <div class="grid-row">
-                                                        <div class="grid-md-6 about-grid">
+                                                        <div class="grid-md-6">
                                                             <div class="single-item-image-box">
                                                                 <div class="image-thumb"><img
                                                                         fetchpriority="high" decoding="async"
@@ -58,9 +58,9 @@
                                                                         alt="" height="1200" width="960"/></div>
                                                             </div>
                                                         </div>
-                                                        <div class="grid-md-6 about-grid">
+                                                        <div class="grid-md-6">
                                                             <div class="single-item-content">
-                                                                <div class="about-content"><p
+                                                                <div ><p
                                                                         class="single-item-desc">Bovenstaande
                                                                         uitspraak vat mijn onderwijsvisie mooi samen,
                                                                         zowel
