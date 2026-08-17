@@ -12,7 +12,7 @@
             background: none !important;
             padding: 0 !important;
         }
-    
+
 
 /* block 2 */
 
@@ -196,7 +196,7 @@
             margin-top: 0;
             padding: 1.25em 2.375em
         }
-    
+
 
 /* block 3 */
 
@@ -216,7 +216,7 @@
             color: #fff;
             text-decoration: none
         }
-    
+
 
 /* block 4 */
 
@@ -543,7 +543,7 @@
             font-size: 1.5em;
             line-height: 1.6;
         }
-    
+
 
 /* block 5 */
 
@@ -637,7 +637,7 @@
             border-right: 5px solid #fbc531;
             border-left: medium none;
         }
-    
+
 
 /* block 6 */
 
@@ -645,7 +645,7 @@
             background: #fbc531;
             color: #000;
         }
-    
+
 
 /* block 7 */
 
@@ -700,25 +700,25 @@
             margin: 0 0 30px 0
         }
 
-        .section-g-eod5ffc {
+        .cms-quote {
             margin: -20px 0 40px 0;
             padding: 20px 20px 20px 20px
         }
 
         @media only screen and (min-width: 768px) {
-            .section-g-eod5ffc {
+            .cms-quote {
                 margin: 0 0 50px 0;
                 padding: 10px 0 0 0
             }
         }
 
-        .section-g-02r26w7.element-icon .element-icon-box {
+        .element-icon .element-icon-box {
             color: #ededed;
             margin: 0 0 -30px -20px;
             font-size: 40px
         }
 
-        .section-g-uw1ztuj.element-advanced-text .text {
+        .section-cms-quote.element-advanced-text .text {
             margin: 0 0 30px 0;
             color: #000;
             font-family: Georgia;
@@ -728,7 +728,7 @@
             line-height: 1.4
         }
 
-        .section-g-vnbafnj.element-advanced-text .text {
+        .element-advanced-text .text {
             margin: 0 0 0 0;
             color: #000000;
             font-family: Verdana;
@@ -736,13 +736,13 @@
             font-weight: 600;
             line-height: 1
         }
-    
+
 
 /* block 8 */
 
         .easy-notification-bar {
             z-index: 3001;
-        }        
+        }
 
 /* block 9 */
 
