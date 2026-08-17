@@ -53,7 +53,7 @@
     <link rel='stylesheet' id='wp-patterns-css' href='/css/includes/css/dist/patterns/style.min.css?ver=6.6.2' type='text/css' media='all'/>
     <link rel='stylesheet' id='wp-editor-css' href='/css/includes/css/dist/editor/style.min.css?ver=6.6.2' type='text/css' media='all'/>
     <link rel='stylesheet' id='dashicons-css' href='/css/includes/css/dashicons.min.css?ver=6.6.2' type='text/css' media='all'/>
-    <link rel='stylesheet' id='gutentor-css' href='/css/gutentor/dist/blocks.style.build.css?ver=4.0.5' type='text/css' media='all'/>
+    <link rel='stylesheet' id='css' href='/css/gutentor/dist/blocks.style.build.css?ver=4.0.5' type='text/css' media='all'/>
     <link rel='stylesheet' id='me-spr-block-styles-css' href='/css/simple-post-redirect/css/block-styles.min.css?ver=6.6.2' type='text/css' media='all'/>
     <link rel='stylesheet' id='debijschijner-googleapis-css' href='/css/external/fonts/google/ea95bddfec72.css' type='text/css' media='all'/>
     <link rel='stylesheet' id='bootstrap-css' href='/css/debijschijner/assets/library/bootstrap/css/bootstrap.min.css?ver=3.3.6' type='text/css' media='all'/>
@@ -63,7 +63,7 @@
     <link rel='stylesheet' id='debijschijner-block-front-styles-css' href='/css/debijschijner/fromthecity/gutenberg/gutenberg-front.css?ver=1.0' type='text/css' media='all'/>
     <link rel='stylesheet' id='easy-notification-bar-css' href='/css/easy-notification-bar/assets/css/front.css?ver=1.6.1' type='text/css' media='all'/>
     <link rel='stylesheet' id='debijschijner-custom-extracted-css' href='/css/debijschijner/bijschijner.css' type='text/css' media='all'/>
-    <link rel='stylesheet' id='gutentor-google-fonts-css' href='/css/external/fonts/google/e02796c9075c.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='google-fonts-css' href='/css/external/fonts/google/e02796c9075c.css' type='text/css' media='all'/>
     
     <script type="text/javascript" src="/js/includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
     <script type="text/javascript" src="/js/includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
@@ -85,7 +85,7 @@
     @endif
     
 </head>
-<body class="page-template-default page gutentor-active no-sidebar">
+<body class="page-template-default page active no-sidebar">
 
     @include('cms.partials.notification')
 
@@ -99,10 +99,10 @@
   
     @include('cms.partials.footer')
 
-    <link rel='stylesheet' id='gutentor-missing-global-css' href='/css/gutentor/assets/css/global/global.css?ver=4.0.5' type='text/css' media='all' />
-    <link rel='stylesheet' id='gutentor-missing-widget-global-css' href='/css/gutentor/assets/css/widget/widget-global.css?ver=4.0.5' type='text/css' media='all' />
-    <link rel='stylesheet' id='gutentor-missing-content-box-css' href='/css/gutentor/assets/css/widget/content-box.css?ver=4.0.5' type='text/css' media='all' />
-    <link rel='stylesheet' id='gutentor-missing-social-css' href='/css/gutentor/assets/css/widget/social.css?ver=4.0.5' type='text/css' media='all' />
+    <link rel='stylesheet' id='missing-global-css' href='/css/gutentor/assets/css/global/global.css?ver=4.0.5' type='text/css' media='all' />
+    <link rel='stylesheet' id='missing-widget-global-css' href='/css/gutentor/assets/css/widget/widget-global.css?ver=4.0.5' type='text/css' media='all' />
+    <link rel='stylesheet' id='missing-content-box-css' href='/css/gutentor/assets/css/widget/content-box.css?ver=4.0.5' type='text/css' media='all' />
+    <link rel='stylesheet' id='missing-social-css' href='/css/gutentor/assets/css/widget/social.css?ver=4.0.5' type='text/css' media='all' />
     
     <script type="text/javascript" src="/js/gutentor/assets/library/wow/wow.min.js?ver=1.2.1" id="wow-js"></script>
     <script type="text/javascript" src="/js/debijschijner/fromthecity/core/js/skip-link-focus-fix.js?ver=20130115" id="debijschijner-skip-link-focus-fix-js"></script>
@@ -112,6 +112,6 @@
     <script type="text/javascript" src="/js/debijschijner/assets/js/debijschijner-custom.js?ver=1.0.2" id="debijschijner-custom-js"></script>
     <script type="text/javascript" src="/js/google-site-kit/dist/assets/js/googlesitekit-consent-mode-86cb52dcb9f2b27ed244.js" id="googlesitekit-consent-mode-js"></script>
     <script type="text/javascript" src="/js/wp-consent-api/assets/js/wp-consent-api.min.js?ver=2.0.1" id="consent-api-js"></script>
-    <script type="text/javascript" src="/js/gutentor/assets/js/gutentor.min.js?ver=4.0.5" id="gutentor-block-js"></script>
+    <script type="text/javascript" src="/js/gutentor/assets/js/gutentor.min.js?ver=4.0.5" id="block-js"></script>
 </body>
 </html>

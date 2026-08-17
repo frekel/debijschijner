@@ -23,21 +23,21 @@
                                         <div
                                             class="block-group__inner-container is-layout-constrained block-group-is-layout-constrained">
                                             <div id="section-gf8ca71"
-                                                 class="block-gutentor-m12 section-gf8ca71 gutentor-module gutentor-module-quote">
+                                                 class="block-m12 section-gf8ca71 module module-quote">
                                                 <section id="g-eod5ffc"
-                                                         class="block-gutentor-m3 section-g-eod5ffc gutentor-module gutentor-container-cover">
+                                                         class="block-m3 section-g-eod5ffc module container-cover">
                                                     <div class="grid-container">
                                                         <div id="section-g-02r26w7"
-                                                             class="block-gutentor-e5 section-g-02r26w7 gutentor-element gutentor-element-icon gutentor-icon-default">
-                                                            <div class="gutentor-element-icon-box"><i
+                                                             class="block-e5 section-g-02r26w7 element element-icon icon-default">
+                                                            <div class="element-icon-box"><i
                                                                 class="fas fa-quote-left"></i></div>
                                                         </div>
 
 
                                                         <div id="section-g-uw1ztuj"
-                                                             class="block-gutentor-e1 section-g-uw1ztuj gutentor-element gutentor-element-advanced-text">
-                                                            <div class="gutentor-text-wrap">
-                                                                <div class="gutentor-text"><br>De beste leraren zijn
+                                                             class="block-e1 section-g-uw1ztuj element element-advanced-text">
+                                                            <div class="text-wrap">
+                                                                <div class="text"><br>De beste leraren zijn
                                                                     degene die je laten zien waar te kijken, maar niet
                                                                     vertellen wat te zien
                                                                 </div>
@@ -46,8 +46,8 @@
 
 
                                                         <div id="section-g-vnbafnj"
-                                                             class="block-gutentor-e1 section-g-vnbafnj gutentor-element gutentor-element-advanced-text">
-                                                            <div class="gutentor-text-wrap"><p class="gutentor-text">
+                                                             class="block-e1 section-g-vnbafnj element element-advanced-text">
+                                                            <div class="text-wrap"><p class="text">
                                                                 Alexandra Trenfor</p></div>
                                                         </div>
                                                     </div>
@@ -58,14 +58,14 @@
 
 
                                     <section id="section-3b86120e-0a57-494e-a3c0-a1e3138eee51"
-                                             class="block-gutentor-about-block alignfull gutentor-section gutentor-about about-template1 has-color-bg has-custom-bg">
+                                             class="block-about-block alignfull section about about-template1 has-color-bg has-custom-bg">
                                         <div class="grid-container">
-                                            <div class="gutentor-grid-item-wrap">
-                                                <div class="gutentor-single-item">
+                                            <div class="grid-item-wrap">
+                                                <div class="single-item">
                                                     <div class="grid-row">
                                                         <div class="grid-md-6 about-grid">
-                                                            <div class="gutentor-single-item-image-box">
-                                                                <div class="gutentor-image-thumb"><img
+                                                            <div class="single-item-image-box">
+                                                                <div class="image-thumb"><img
                                                                     fetchpriority="high" decoding="async"
                                                                     class="normal-image"
                                                                     src="/images/uploads/2024/09/Meer-Primair-foto.jpg"
@@ -73,9 +73,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="grid-md-6 about-grid">
-                                                            <div class="gutentor-single-item-content">
-                                                                <div class="gutentor-about-content"><p
-                                                                    class="gutentor-single-item-desc">Bovenstaande
+                                                            <div class="single-item-content">
+                                                                <div class="about-content"><p
+                                                                    class="single-item-desc">Bovenstaande
                                                                     uitspraak vat mijn onderwijsvisie mooi samen, zowel
                                                                     in mijn rol als leerkracht als die van begeleider
                                                                     van PABO-studenten en startende leerkrachten. Maar

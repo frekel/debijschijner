@@ -5,20 +5,20 @@
                     <div class="footer-columns">
                         <div class="footer-sidebar col-sm-3">
                             <aside id="gutentor_wp_block_widget-4" class="widget widget_gutentor_wp_block_widget">
-                                <div class="gutentor-widget gutentor-wp-block-widget">
+                                <div class="widget wp-block-widget">
                                     <section id="section-g-v03mrwo"
-                                             class="wp-block-gutentor-content-box gutentor-section gutentor-content-box-wrapper content-template1 has-color-bg has-custom-bg">
+                                             class="wp-block-content-box section content-box-wrapper content-template1 has-color-bg has-custom-bg">
                                         <div class="grid-container">
-                                            <div class="gutentor-block-header">
-                                                <div class="gutentor-section-title"><h3 class="gutentor-title">Debora
+                                            <div class="block-header">
+                                                <div class="section-title"><h3 class="title">Debora
                                                     van der Stad</h3></div>
                                             </div>
-                                            <div class="grid-row gutentor-grid-item-wrap">
-                                                <div class="gutentor-grid-column grid-lg-12 grid-md-4 grid-12">
-                                                    <div class="gutentor-single-item gutentor-single-item-0">
-                                                        <div class="gutentor-single-item-wrap">
-                                                            <div class="gutentor-single-item-content"><p
-                                                                class="gutentor-single-item-desc">Zuidgors 20<br>2134WE
+                                            <div class="grid-row grid-item-wrap">
+                                                <div class="grid-column grid-lg-12 grid-md-4 grid-12">
+                                                    <div class="single-item single-item-0">
+                                                        <div class="single-item-wrap">
+                                                            <div class="single-item-content"><p
+                                                                class="single-item-desc">Zuidgors 20<br>2134WE
                                                                 Hoofddorp<br>06-24881874<br><a
                                                                     href="mailto:debora@debijschijner.nl">debora@debijschijner.nl</a><br>kvk:
                                                                 95218661</p></div>
@@ -45,48 +45,48 @@
                         </div>
                         <div class="footer-sidebar col-sm-3">
                             <aside id="gutentor_wp_block_widget-3" class="widget widget_gutentor_wp_block_widget">
-                                <div class="gutentor-widget gutentor-wp-block-widget">
+                                <div class="widget wp-block-widget">
                                     <div id="section-07c12c9c-d70e-4faa-8898-7253e666fc41"
-                                         class="wp-block-gutentor-social alignwide gutentor-section gutentor-social social-template1 has-color-bg has-custom-bg">
+                                         class="wp-block-social alignwide section social social-template1 has-color-bg has-custom-bg">
                                         <div class="grid-container">
-                                            <div class="gutentor-block-header">
-                                                <div class="gutentor-section-title text-center"><h3
-                                                    class="gutentor-title">Socials</h3></div>
+                                            <div class="block-header">
+                                                <div class="section-title text-center"><h3
+                                                    class="title">Socials</h3></div>
                                             </div>
-                                            <div class="inline-wrapper gutentor-grid-item-wrap">
-                                                <div class="gutentor-grid-column gutentor-social-item">
-                                                    <div class="gutentor-single-item gutentor-single-item-0">
-                                                        <div class="gutentor-single-item-content">
-                                                            <div class="gutentor-single-item-icon-box"><a
-                                                                class="gutentor-social-icon" href="#facebooklink"><i
+                                            <div class="inline-wrapper grid-item-wrap">
+                                                <div class="grid-column social-item">
+                                                    <div class="single-item single-item-0">
+                                                        <div class="single-item-content">
+                                                            <div class="single-item-icon-box"><a
+                                                                class="social-icon" href="#facebooklink"><i
                                                                 class="fab fa-facebook-f"></i></a></div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="gutentor-grid-column gutentor-social-item">
-                                                    <div class="gutentor-single-item gutentor-single-item-1">
-                                                        <div class="gutentor-single-item-content">
-                                                            <div class="gutentor-single-item-icon-box"><a
-                                                                class="gutentor-social-icon"
+                                                <div class="grid-column social-item">
+                                                    <div class="single-item single-item-1">
+                                                        <div class="single-item-content">
+                                                            <div class="single-item-icon-box"><a
+                                                                class="social-icon"
                                                                 href="https://www.linkedin.com/in/debora-van-der-stad/"><i
                                                                 class="fab fa-linkedin-in"></i></a></div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="gutentor-grid-column gutentor-social-item">
-                                                    <div class="gutentor-single-item gutentor-single-item-2">
-                                                        <div class="gutentor-single-item-content">
-                                                            <div class="gutentor-single-item-icon-box"><a
-                                                                class="gutentor-social-icon" href="#instragram"><i
+                                                <div class="grid-column social-item">
+                                                    <div class="single-item single-item-2">
+                                                        <div class="single-item-content">
+                                                            <div class="single-item-icon-box"><a
+                                                                class="social-icon" href="#instragram"><i
                                                                 class="fab fa-instagram"></i></a></div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="gutentor-grid-column gutentor-social-item">
-                                                    <div class="gutentor-single-item gutentor-single-item-3">
-                                                        <div class="gutentor-single-item-content">
-                                                            <div class="gutentor-single-item-icon-box"><a
-                                                                class="gutentor-social-icon" href="#youtube"><i
+                                                <div class="grid-column social-item">
+                                                    <div class="single-item single-item-3">
+                                                        <div class="single-item-content">
+                                                            <div class="single-item-icon-box"><a
+                                                                class="social-icon" href="#youtube"><i
                                                                 class="fab fa-youtube"></i></a></div>
                                                         </div>
                                                     </div>
