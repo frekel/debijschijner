@@ -774,11 +774,31 @@
 
 .cms-richtext {
     color: #838383;
+    padding: 0 0 0 0;
+    font-family: 'Lato', sans-serif;
     font-size: 18px;
-    line-height: 2;
+    font-weight: 400;
+    line-height: 1.6;
+    font-style: normal;
+    text-align: justify;
 }
 
 .cms-image-text {
     background-color: #fcfcfc;
     padding: 15px;
+}
+
+.cms-homepage-tekst {
+    padding: 80px 45px 120px 45px
+}
+
+.cms-homepage-tekst h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0a0a0a;
+    line-height: 1.4;
+}
+
+.block-shape-top span svg path{
+    fill: #fbc531;
 }

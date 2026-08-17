@@ -6,6 +6,7 @@ use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -30,6 +31,15 @@ class PageForm
                             ->label('Titel')
                             ->required()
                             ->helperText('Weergavetitel van de pagina'),
+                        Select::make('template')
+                            ->label('Page template')
+                            ->options([
+                                'default' => 'Default',
+                                'homepage' => 'Homepage',
+                            ])
+                            ->default('default')
+                            ->required()
+                            ->helperText('Kies welke layout deze pagina gebruikt voor CMS-blokken.'),
                         Toggle::make('is_published')
                             ->label('Gepubliceerd')
                             ->default(true)
@@ -119,6 +129,28 @@ class PageForm
                                             ->label('Auteur')
                                             ->required()
                                             ->helperText('Bijv: Alexandra Trenfor'),
+                                    ]),
+                                Block::make('beeldbegeleiding')
+                                    ->label('Homepage tekst')
+                                    ->schema([
+                                        TextInput::make('title')
+                                            ->label('Titel')
+                                            ->required(),
+                                        Textarea::make('text')
+                                            ->label('Tekst')
+                                            ->rows(8)
+                                            ->required(),
+                                    ]),
+                                Block::make('process_post')
+                                    ->label('Process post')
+                                    ->schema([
+                                        TextInput::make('title')
+                                            ->label('Title')
+                                            ->required(),
+                                        Textarea::make('text')
+                                            ->label('Text')
+                                            ->rows(6)
+                                            ->required(),
                                     ]),
                             ])
                             ->addActionLabel('Blok toevoegen')

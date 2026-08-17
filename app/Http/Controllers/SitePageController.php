@@ -30,6 +30,7 @@ class SitePageController extends Controller
         if ($page) {
             if ($this->hasContentBlocks($page)) {
                 $html = view('cms.page', [
+                    'layoutView' => $this->resolveLayoutView((string) ($page->template ?? 'default')),
                     'page' => $page,
                     'title' => $page->meta_title ?: $page->title,
                     'metaDescription' => $page->meta_description,
@@ -115,24 +116,13 @@ class SitePageController extends Controller
         $data = is_array($block['data'] ?? null) ? $block['data'] : [];
 
         return match ($type) {
-            'hero' => $this->renderHeroBlock($data),
             'rich_text' => $this->renderRichTextBlock($data),
             'image_text' => $this->renderImageTextBlock($data),
-            'cta' => $this->renderCtaBlock($data),
             'quote' => $this->renderQuoteBlock($data),
-            'html' => $this->renderHtmlBlock($data),
+            'beeldbegeleiding' => $this->renderBeeldbegeleidingBlock($data),
+            'process_post' => $this->renderProcessPostBlock($data),
             default => '',
         };
-    }
-
-    private function renderHeroBlock(array $data): string
-    {
-        return view('cms.blocks.hero', [
-            'heading' => (string) ($data['heading'] ?? ''),
-            'subheading' => (string) ($data['subheading'] ?? ''),
-            'buttonText' => (string) ($data['button_text'] ?? ''),
-            'buttonUrl' => (string) ($data['button_url'] ?? '#'),
-        ])->render();
     }
 
     private function renderRichTextBlock(array $data): string
@@ -164,16 +154,6 @@ class SitePageController extends Controller
         ])->render();
     }
 
-    private function renderCtaBlock(array $data): string
-    {
-        return view('cms.blocks.cta', [
-            'heading' => (string) ($data['heading'] ?? ''),
-            'text' => (string) ($data['text'] ?? ''),
-            'buttonText' => (string) ($data['button_text'] ?? ''),
-            'buttonUrl' => (string) ($data['button_url'] ?? '#'),
-        ])->render();
-    }
-
     private function renderQuoteBlock(array $data): string
     {
         $quoteText = trim((string) ($data['quote_text'] ?? ''));
@@ -189,11 +169,19 @@ class SitePageController extends Controller
         ])->render();
     }
 
-    private function renderHtmlBlock(array $data): string
+    private function renderBeeldbegeleidingBlock(array $data): string
     {
-        return view('cms.blocks.html', [
-            'heading' => (string) ($data['heading'] ?? ''),
-            'code' => (string) ($data['code'] ?? ''),
+        return view('cms.blocks.homepage-tekst', [
+            'title' => (string) ($data['title'] ?? ''),
+            'text' => (string) ($data['text'] ?? ''),
+        ])->render();
+    }
+
+    private function renderProcessPostBlock(array $data): string
+    {
+        return view('cms.blocks.process-post', [
+            'title' => (string) ($data['title'] ?? ''),
+            'text' => (string) ($data['text'] ?? ''),
         ])->render();
     }
 
@@ -216,6 +204,14 @@ class SitePageController extends Controller
         }
 
         return Storage::disk('public')->url($path);
+    }
+
+    private function resolveLayoutView(string $template): string
+    {
+        return match ($template) {
+            'homepage' => 'cms.layouts.homepage',
+            default => 'cms.layouts.default',
+        };
     }
 
     private function applySeoMetadata(string $html, Page $page): string
