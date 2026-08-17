@@ -13,10 +13,16 @@ class Page extends Model
         'slug',
         'title',
         'html',
+        'content_blocks',
+        'meta_title',
+        'meta_description',
+        'og_image',
+        'canonical_url',
         'is_published',
     ];
 
     protected $casts = [
+        'content_blocks' => 'array',
         'is_published' => 'boolean',
     ];
 }

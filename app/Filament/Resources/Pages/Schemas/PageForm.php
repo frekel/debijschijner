@@ -2,9 +2,14 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -33,11 +38,142 @@ class PageForm
                 Section::make('HTML Inhoud')
                     ->schema([
                         Textarea::make('html')
-                            ->label('HTML')
+                            ->label('Legacy HTML')
                             ->required()
                             ->rows(20)
                             ->columnSpanFull()
-                            ->helperText('Volledige HTML-inhoud van de pagina'),
+                            ->helperText('Bestaande volledige HTML. Wordt gebruikt als er geen CMS-blokken zijn.'),
+                    ]),
+                Section::make('CMS Inhoud (Nieuw)')
+                    ->schema([
+                        Builder::make('content_blocks')
+                            ->label('Inhoudsblokken')
+                            ->blocks([
+                                Block::make('hero')
+                                    ->label('Hero')
+                                    ->schema([
+                                        TextInput::make('heading')
+                                            ->label('Kop')
+                                            ->required(),
+                                        Textarea::make('subheading')
+                                            ->label('Subkop')
+                                            ->rows(3),
+                                        TextInput::make('button_text')
+                                            ->label('Knop tekst'),
+                                        TextInput::make('button_url')
+                                            ->label('Knop URL')
+                                            ->url(),
+                                    ]),
+                                Block::make('rich_text')
+                                    ->label('Tekst')
+                                    ->schema([
+                                        TextInput::make('heading')
+                                            ->label('Kop'),
+                                        RichEditor::make('body')
+                                            ->label('Inhoud')
+                                            ->visible(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'wysiwyg')
+                                            ->required(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'wysiwyg'),
+                                        Textarea::make('body_html')
+                                            ->label('HTML code')
+                                            ->rows(12)
+                                            ->visible(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'html')
+                                            ->required(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'html')
+                                            ->helperText('Plak hier HTML als je geen WYSIWYG wilt gebruiken.'),
+                                        ToggleButtons::make('editor_mode')
+                                            ->label('Editor modus')
+                                            ->options([
+                                                'wysiwyg' => 'WYSIWYG',
+                                                'html' => 'HTML code',
+                                            ])
+                                            ->default('wysiwyg')
+                                            ->inline()
+                                            ->live(),
+                                    ]),
+                                Block::make('image_text')
+                                    ->label('Afbeelding + Tekst')
+                                    ->schema([
+                                        FileUpload::make('image')
+                                            ->label('Afbeelding')
+                                            ->image()
+                                            ->disk('public_uploads')
+                                            ->directory(fn (): string => now()->format('Y/m'))
+                                            ->preserveFilenames()
+                                            ->required(),
+                                        TextInput::make('alt')
+                                            ->label('Alt tekst')
+                                            ->required(),
+                                        TextInput::make('heading')
+                                            ->label('Kop'),
+                                        RichEditor::make('body')
+                                            ->label('Inhoud')
+                                            ->visible(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'wysiwyg'),
+                                        Textarea::make('body_html')
+                                            ->label('HTML code')
+                                            ->rows(12)
+                                            ->visible(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'html')
+                                            ->helperText('Plak hier HTML als je geen WYSIWYG wilt gebruiken.'),
+                                        ToggleButtons::make('editor_mode')
+                                            ->label('Editor modus')
+                                            ->options([
+                                                'wysiwyg' => 'WYSIWYG',
+                                                'html' => 'HTML code',
+                                            ])
+                                            ->default('wysiwyg')
+                                            ->inline()
+                                            ->live(),
+                                    ]),
+                                Block::make('cta')
+                                    ->label('Call to Action')
+                                    ->schema([
+                                        TextInput::make('heading')
+                                            ->label('Kop')
+                                            ->required(),
+                                        Textarea::make('text')
+                                            ->label('Tekst')
+                                            ->rows(3),
+                                        TextInput::make('button_text')
+                                            ->label('Knop tekst')
+                                            ->required(),
+                                        TextInput::make('button_url')
+                                            ->label('Knop URL')
+                                            ->required()
+                                            ->url(),
+                                    ]),
+                                Block::make('html')
+                                    ->label('Custom HTML')
+                                    ->schema([
+                                        TextInput::make('heading')
+                                            ->label('Kop (optioneel)')
+                                            ->helperText('Alleen voor referentie in editor'),
+                                        Textarea::make('code')
+                                            ->label('HTML Code')
+                                            ->required()
+                                            ->rows(15)
+                                            ->helperText('Plak hier je complete HTML-code'),
+                                    ]),
+                            ])
+                            ->addActionLabel('Blok toevoegen')
+                            ->collapsible()
+                            ->columnSpanFull()
+                            ->helperText('Wanneer je hier blokken toevoegt, gebruikt de frontend deze CMS-opmaak in plaats van de legacy HTML.'),
+                    ]),
+                Section::make('SEO')
+                    ->schema([
+                        TextInput::make('meta_title')
+                            ->label('Meta title')
+                            ->maxLength(70),
+                        Textarea::make('meta_description')
+                            ->label('Meta description')
+                            ->rows(3)
+                            ->maxLength(170),
+                        FileUpload::make('og_image')
+                            ->label('OG afbeelding')
+                            ->image()
+                            ->disk('public')
+                            ->directory('seo'),
+                        TextInput::make('canonical_url')
+                            ->label('Canonical URL')
+                            ->url(),
                     ]),
             ]);
     }
