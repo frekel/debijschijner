@@ -38,6 +38,7 @@ class PageForm
                                 'homepage' => 'Homepage',
                                 'full_screen' => 'Full screen',
                                 'form' => 'Form',
+                                'promo' => 'Promo',
                             ])
                             ->default('default')
                             ->required()
@@ -75,6 +76,15 @@ class PageForm
                         TextInput::make('form_title')
                             ->label('Form titel')
                             ->default('Neem contact op'),
+                    ]),
+                Section::make('Promo template')
+                    ->visible(fn (callable $get): bool => ($get('template') ?? 'default') === 'promo')
+                    ->schema([
+                        TextInput::make('promo_redirect_url')
+                            ->label('Redirect URL')
+                            ->default('/')
+                            ->required()
+                            ->helperText('Bezoekers op deze pagina worden gelogd en daarna hiernaartoe doorgestuurd.'),
                     ]),
                 Section::make('CMS Inhoud (Nieuw)')
                     ->schema([

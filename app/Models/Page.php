@@ -14,6 +14,7 @@ class Page extends Model
         'title',
         'template',
         'form_title',
+        'promo_redirect_url',
         'content_blocks',
         'meta_title',
         'meta_description',

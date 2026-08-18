@@ -23,6 +23,10 @@ class PagesTable
                     ->label('Gepubliceerd')
                     ->boolean()
                     ->sortable(),
+                IconColumn::make('show_in_menu')
+                    ->label('In menu')
+                    ->boolean()
+                    ->sortable(),
                 TextColumn::make('slug')
                     ->label('Slug')
                     ->searchable()
@@ -45,6 +49,14 @@ class PagesTable
                     })
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('template')
+                    ->label('Template')
+                    ->badge()
+                    ->sortable(),
+                TextColumn::make('promo_redirect_url')
+                    ->label('Promo redirect')
+                    ->limit(40)
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->label('Gemaakt')
                     ->dateTime('d-m-Y H:i')

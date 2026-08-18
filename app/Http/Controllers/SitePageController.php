@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\PromoHit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class SitePageController extends Controller
 {
-    public function show(string $path = ''): Response
+    public function show(Request $request, string $path = ''): Response
     {
         $normalizedPath = trim($path, '/');
         $slug = $normalizedPath === '' ? 'home' : $normalizedPath;
@@ -46,6 +49,12 @@ class SitePageController extends Controller
         }
 
         if ($page) {
+            if (($page->template ?? 'default') === 'promo') {
+                $this->recordPromoHit($request, $page, $normalizedPath);
+
+                return redirect((string) ($page->promo_redirect_url ?: '/'));
+            }
+
             $html = view('cms.page', [
                 'layoutView' => $this->resolveLayoutView((string) ($page->template ?? 'default')),
                 'page' => $page,
@@ -62,6 +71,33 @@ class SitePageController extends Controller
         }
 
         abort(404);
+    }
+
+    private function recordPromoHit(Request $request, Page $page, string $path): void
+    {
+        try {
+            PromoHit::query()->create([
+                'page_id' => $page->id,
+                'page_slug' => $page->slug,
+                'page_title' => $page->title,
+                'path' => $path,
+                'full_url' => $request->fullUrl(),
+                'redirect_target' => (string) ($page->promo_redirect_url ?: '/'),
+                'method' => $request->method(),
+                'host' => $request->getHost(),
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'referer' => $request->headers->get('referer'),
+                'accept_language' => $request->headers->get('accept-language'),
+                'query_params' => $request->query(),
+                'headers' => collect($request->headers->all())
+                    ->except(['cookie'])
+                    ->map(fn (array $values): array|string => count($values) === 1 ? $values[0] : $values)
+                    ->all(),
+            ]);
+        } catch (Throwable $exception) {
+            Log::warning('Promo hit could not be stored.', ['exception' => $exception]);
+        }
     }
 
     private function renderPublicationsIndexResponse(): Response
