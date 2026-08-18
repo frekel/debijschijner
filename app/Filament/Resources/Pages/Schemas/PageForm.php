@@ -12,6 +12,8 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 class PageForm
@@ -98,11 +100,23 @@ class PageForm
                                             ->label('Kop'),
                                         RichEditor::make('body')
                                             ->label('Inhoud')
+                                            ->live(onBlur: true)
+                                            ->afterStateUpdated(function (Set $set, ?string $state): void {
+                                                $set('body_html', $state ?? '');
+                                            })
                                             ->visible(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'wysiwyg')
                                             ->required(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'wysiwyg'),
                                         Textarea::make('body_html')
                                             ->label('HTML code')
                                             ->rows(12)
+                                            ->live(onBlur: true)
+                                            ->afterStateHydrated(function (Textarea $component, Get $get): void {
+                                                $component->state((string) ($get('body') ?? ''));
+                                            })
+                                            ->afterStateUpdated(function (Set $set, ?string $state): void {
+                                                $set('body', $state ?? '');
+                                            })
+                                            ->dehydrated(false)
                                             ->visible(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'html')
                                             ->required(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'html')
                                             ->helperText('Plak hier HTML als je geen WYSIWYG wilt gebruiken.'),
@@ -133,10 +147,22 @@ class PageForm
                                             ->label('Kop'),
                                         RichEditor::make('body')
                                             ->label('Inhoud')
+                                            ->live(onBlur: true)
+                                            ->afterStateUpdated(function (Set $set, ?string $state): void {
+                                                $set('body_html', $state ?? '');
+                                            })
                                             ->visible(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'wysiwyg'),
                                         Textarea::make('body_html')
                                             ->label('HTML code')
                                             ->rows(12)
+                                            ->live(onBlur: true)
+                                            ->afterStateHydrated(function (Textarea $component, Get $get): void {
+                                                $component->state((string) ($get('body') ?? ''));
+                                            })
+                                            ->afterStateUpdated(function (Set $set, ?string $state): void {
+                                                $set('body', $state ?? '');
+                                            })
+                                            ->dehydrated(false)
                                             ->visible(fn (callable $get): bool => ($get('editor_mode') ?? 'wysiwyg') === 'html')
                                             ->helperText('Plak hier HTML als je geen WYSIWYG wilt gebruiken.'),
                                         ToggleButtons::make('editor_mode')

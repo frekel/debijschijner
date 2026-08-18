@@ -38,8 +38,8 @@
     <meta name="author" content="admin"/>
 
     <link rel="alternate" type="application/rss+xml" title="Verlicht jouw onderwijs! &raquo; feed" href="/feed/"/>
-    <link rel="alternate" type="application/rss+xml" title="Verlicht jouw onderwijs! &raquo; reactiesfeed"
-          href="/comments/feed/"/>
+    <link rel="alternate" type="application/rss+xml" title="Verlicht jouw onderwijs! &raquo; reactiesfeed" href="/comments/feed/"/>
+
     <link rel='stylesheet' id='wp-block-library-css' href='/css/includes/css/dist/block-library/style.min.css?ver=6.6.2' type='text/css' media='all'/>
     <link rel='stylesheet' id='magnific-popup-css' href='/css/gutentor/assets/library/magnific-popup/magnific-popup.min.css?ver=1.8.0' type='text/css' media='all'/>
     <link rel='stylesheet' id='slick-css' href='/css/gutentor/assets/library/slick/slick.min.css?ver=1.8.1' type='text/css' media='all'/>
@@ -64,6 +64,11 @@
     <link rel='stylesheet' id='easy-notification-bar-css' href='/css/easy-notification-bar/assets/css/front.css?ver=1.6.1' type='text/css' media='all'/>
     <link rel='stylesheet' id='debijschijner-custom-extracted-css' href='/css/debijschijner/bijschijner.css' type='text/css' media='all'/>
     <link rel='stylesheet' id='google-fonts-css' href='/css/external/fonts/google/e02796c9075c.css' type='text/css' media='all'/>
+
+    <link rel='stylesheet' id='missing-global-css' href='/css/gutentor/assets/css/global/global.css?ver=4.0.5' type='text/css' media='all' />
+    <link rel='stylesheet' id='missing-widget-global-css' href='/css/gutentor/assets/css/widget/widget-global.css?ver=4.0.5' type='text/css' media='all' />
+    <link rel='stylesheet' id='missing-content-box-css' href='/css/gutentor/assets/css/widget/content-box.css?ver=4.0.5' type='text/css' media='all' />
+    <link rel='stylesheet' id='missing-social-css' href='/css/gutentor/assets/css/widget/social.css?ver=4.0.5' type='text/css' media='all' />
 
     <script type="text/javascript" src="/js/includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
     <script type="text/javascript" src="/js/includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>

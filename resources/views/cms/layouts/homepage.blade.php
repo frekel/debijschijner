@@ -5,7 +5,7 @@
     @include('cms.partials.header')
 
     <div class="home-bxslider full-screen-bg">
-        <section id="at-banner-slider" class="home-fullscreen  at-parallax num- full-screen-bg " style="background-image: url(&quot;https://debijschijner.nl/wp-content/uploads/2024/09/cropped-Meer-Primair-foto.jpg&quot;); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: center 10px;">
+        <section id="at-banner-slider" class="home-fullscreen  at-parallax num- full-screen-bg " style="background-image: url(&quot;https://debijschijner.nl/wp-content/uploads/2024/09/cropped-Meer-Primair-foto.jpg&quot;); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: center bottom;">
             <div class="slide at-slide-wrap">
                 <div class="bx-wrapper" style="max-width: 100%;"><div class="bx-viewport" aria-live="polite" style="width: 100%; overflow: hidden; position: relative; height: 561px;"><ul class="text-slider at-featured-text-slider clearfix" style="display: block; width: auto; position: relative;">
                     <li class="clearfix" style="float: none; list-style: none; position: absolute; width: 1847px; z-index: 50; display: block;" aria-hidden="false">

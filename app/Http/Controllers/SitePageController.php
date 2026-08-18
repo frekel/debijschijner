@@ -172,21 +172,38 @@ class SitePageController extends Controller
             return null;
         }
 
-        $reviewer = Post::query()
+        $reviewers = Post::query()
             ->published()
             ->ofType('reviewer')
+            ->orderBy('sort_order')
+            ->orderBy('id')
             ->get()
-            ->first(fn (Post $post): bool => $this->reviewerSlug($post) === $reviewerSlug);
+            ->values();
 
-        if (! $reviewer) {
+        $currentIndex = $reviewers->search(fn (Post $post): bool => $this->reviewerSlug($post) === $reviewerSlug);
+
+        if ($currentIndex === false) {
             abort(404);
         }
+
+        $reviewer = $reviewers->get($currentIndex);
+        $previousReviewer = $currentIndex > 0 ? $reviewers->get($currentIndex - 1) : null;
+        $nextReviewer = $currentIndex < ($reviewers->count() - 1) ? $reviewers->get($currentIndex + 1) : null;
+
 
         $contentHtml = view('cms.posts.reviewer-detail', [
             'title' => (string) ($reviewer->title ?? ''),
             'text' => (string) ($reviewer->text ?? ''),
             'image' => $this->resolvePublicUrl($reviewer->image),
             'reviewerName' => trim((string) ($reviewer->name ?? '')),
+            'previousReviewer' => $previousReviewer ? [
+                'name' => trim((string) ($previousReviewer->name ?? '')),
+                'url' => '/ervaringen/'.$this->reviewerSlug($previousReviewer),
+            ] : null,
+            'nextReviewer' => $nextReviewer ? [
+                'name' => trim((string) ($nextReviewer->name ?? '')),
+                'url' => '/ervaringen/'.$this->reviewerSlug($nextReviewer),
+            ] : null,
         ])->render();
 
         $html = view('cms.page', [

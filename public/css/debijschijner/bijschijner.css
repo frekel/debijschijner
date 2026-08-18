@@ -1024,6 +1024,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
+            background-position: center center !important;
         }
 
         a:hover,
@@ -1247,11 +1248,19 @@
     color: #838383;
     padding: 0 0 0 0;
     font-family: 'Lato', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.6;
     font-style: normal;
     text-align: justify;
+}
+
+.cms-richtext h4 {
+    margin-top: 3em;
+}
+
+.cms-richtext p {
+    margin-bottom: 1.5em;
 }
 
 .cms-image-text {
@@ -1296,6 +1305,43 @@
 
 .cms-reviewer-detail .cms-copy {
     margin-right: 30px;
+}
+
+.cms-reviewer-detail-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.cms-reviewer-detail-nav-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #000000;
+    background-color: #fbc531;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 3px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.cms-reviewer-detail-nav-button:hover,
+.cms-reviewer-detail-nav-button:focus {
+    background: #e5b124;
+    color: #000000;
+}
+
+.cms-reviewer-detail-nav-next {
+    margin-left: auto;
+}
+
+.cms-reviewer-detail-nav-arrow {
+    font-size: 18px;
+    line-height: 1;
 }
 
 .cms-publications-index {

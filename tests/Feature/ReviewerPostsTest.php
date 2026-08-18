@@ -77,6 +77,35 @@ class ReviewerPostsTest extends TestCase
             ->assertDontSeeText('Dit is oude pagina-inhoud');
     }
 
+    public function test_reviewer_detail_page_renders_previous_and_next_navigation(): void
+    {
+        Post::query()->create($this->review([
+            'name' => 'Anouk',
+            'slug' => 'anouk',
+            'sort_order' => 10,
+        ]));
+
+        Post::query()->create($this->review([
+            'name' => 'Romy van Drosthagen',
+            'slug' => 'romy-van-drosthagen',
+            'sort_order' => 20,
+        ]));
+
+        Post::query()->create($this->review([
+            'name' => 'Djinan',
+            'slug' => 'djinan',
+            'sort_order' => 30,
+        ]));
+
+        $response = $this->get('/ervaringen/romy-van-drosthagen');
+
+        $response->assertOk()
+            ->assertSee('href="/ervaringen/anouk"', false)
+            ->assertSee('href="/ervaringen/djinan"', false)
+            ->assertSeeText('Anouk')
+            ->assertSeeText('Djinan');
+    }
+
     private function review(array $overrides = []): array
     {
         return array_merge([
