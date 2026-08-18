@@ -3,12 +3,8 @@
     @include('cms.partials.notification')
 
     @include('cms.partials.header')
-  
-    <div class="clearfix"></div>
-        <div class="inner-main-title">
-        <header class="entry-header">
-            <h1 class="entry-title">{{ $title ?? ' ' }}</h1></header><!-- .entry-header -->
-    </div>
+
+    @include('cms.partials.header-title')
 
     <div id="content" class="site-content-full-screen">
         <div id="primary" >

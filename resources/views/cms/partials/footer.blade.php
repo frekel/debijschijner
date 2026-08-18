@@ -106,7 +106,7 @@
             <div class="clearfix"></div>
             <div class="footer-copyright border text-center init-animate animated fadeInRight">
                 <div class="site-info">
-                    <a href="https://wordpress.org/">Proudly powered by WordPress</a>
+                    <a href="https://laravel.org/">Proudly powered by Laravel</a>
                     <span class="sep"> | </span>
                     Theme: De Bijschijner by <a href="http://www.fromthe.city/" rel="designer">FTC Themes</a></div>
                 <!-- .site-info -->

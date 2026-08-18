@@ -1,1 +1,3 @@
-<div class="prices-wrapper gutentor-grid-row">{!! $itemsHtml !!}</div>
+<div class="prices-wrapper gutentor-grid-row">
+    {!! $itemsHtml !!}
+</div>

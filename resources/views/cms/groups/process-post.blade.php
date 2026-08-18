@@ -1,1 +1,3 @@
-<div class="timeline-wrapper">{!! $itemsHtml !!}</div>
+<div class="timeline-wrapper">
+    {!! $itemsHtml !!}
+</div>
