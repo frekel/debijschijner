@@ -44,7 +44,7 @@
 
         <div class="cms-native-form-field">
             <label for="contact-message">Bericht</label>
-            <textarea id="contact-message" name="bsforms[fields][3]" rows="7" required>{{ old('bsforms.fields.3') }}</textarea>
+            <textarea id="contact-message" name="bsforms[fields][3]" rows="5" required>{{ old('bsforms.fields.3') }}</textarea>
             @error('bsforms.fields.3')<p class="cms-native-form-error">{{ $message }}</p>@enderror
         </div>
 
