@@ -19,5 +19,3 @@
         @endif
     </div>
 </section>
-
-<div class="clearfix"><br/></div>
