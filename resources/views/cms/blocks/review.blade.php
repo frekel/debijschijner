@@ -5,7 +5,6 @@
             @if($buttonText !== '')
                 <p class="review-card-button-text">"{{ $buttonText }}..."</p>
             @endif
-            <br/>
             <a class="review-card-button" href="/ervaringen/{{ $reviewerSlug }}">
                 <span>Lees meer</span>
                 <i class="gutentor-button-icon fas fa-arrow-right"></i>
