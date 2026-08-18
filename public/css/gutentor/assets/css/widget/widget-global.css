@@ -1,1 +1,59 @@
-.video-popup{padding:100px 0}.video-popup .bg-image,.video-popup .image-thumb{position:relative;overflow:hidden;height:100%}.video-popup .image-thumb{font-size:0;width:200px;text-align:center}.video-popup .bg-image{height:200px}.video-popup .overlay{position:absolute;width:100%;height:100%;top:0;left:0;-webkit-transition:background .5s ease-in-out 0s;transition:background .5s ease-in-out 0s}.video-popup:not(.g-valign-t-desktop):not(.g-valign-c-desktop):not(.g-valign-b-desktop):not(.g-valign-t-tablet):not(.g-valign-c-tablet):not(.g-valign-b-tablet):not(.g-valign-t-mobile):not(.g-valign-c-mobile):not(.g-valign-b-mobile) .grid-container{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center;-ms-flex-direction:column;flex-direction:column;height:100%}.video-popup .video-popup-holder .video-popup-icon-box{background:#cfcfcf;color:gray;border-radius:50%;height:80px;width:80px;line-height:80px;font-size:30px;display:block;text-align:center;margin:0 auto}.video-popup .video-popup-holder .video-popup-image-box{height:140px;width:140px;display:block}
+.video-popup {
+    padding: 100px 0;
+}
+.video-popup .bg-image,
+.video-popup .image-thumb {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+.video-popup .image-thumb {
+    font-size: 0;
+    width: 200px;
+    text-align: center;
+}
+.video-popup .bg-image {
+    height: 200px;
+}
+.video-popup .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -webkit-transition: background 0.5s ease-in-out 0s;
+    transition: background 0.5s ease-in-out 0s;
+}
+.video-popup:not(.g-valign-t-desktop):not(.g-valign-c-desktop):not(
+        .g-valign-b-desktop
+    ):not(.g-valign-t-tablet):not(.g-valign-c-tablet):not(
+        .g-valign-b-tablet
+    ):not(.g-valign-t-mobile):not(.g-valign-c-mobile):not(.g-valign-b-mobile)
+    .grid-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+}
+.video-popup .video-popup-holder .video-popup-icon-box {
+    background: #cfcfcf;
+    color: gray;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    font-size: 30px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+.video-popup .video-popup-holder .video-popup-image-box {
+    height: 140px;
+    width: 140px;
+    display: block;
+}

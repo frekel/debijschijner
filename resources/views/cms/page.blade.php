@@ -46,11 +46,9 @@
     <link rel='stylesheet' id='wpness-grid-css' href='/css/gutentor/assets/library/wpness-grid/wpness-grid.min.css?ver=1.0.0' type='text/css' media='all'/>
     <link rel='stylesheet' id='animate-css' href='/css/gutentor/assets/library/animatecss/animate.min.css?ver=3.7.2' type='text/css' media='all'/>
     <link rel='stylesheet' id='bootstrap-css' href='/css/debijschijner/assets/library/bootstrap/css/bootstrap.min.css?ver=3.3.6' type='text/css' media='all'/>
-    <link rel='stylesheet' id='jquery-bxslider-css' href='/css/debijschijner/assets/library/bxslider/css/jquery.bxslider.min.css?ver=4.2.5' type='text/css' media='all'/>
-    <link rel='stylesheet' id='debijschijner-style-css' href='/css/debijschijner/style.css?ver=1.0.1' type='text/css' media='all'/>
-    <link rel='stylesheet' id='debijschijner-block-front-styles-css' href='/css/debijschijner/fromthecity/gutenberg/gutenberg-front.css?ver=1.0' type='text/css' media='all'/>
+    <link rel='stylesheet' id='jquery-bxslider-css' href='/css/debijschijner/assets/library/bxslider/css/jquery.bxslider.css?ver=4.2.5' type='text/css' media='all'/>
     <link rel='stylesheet' id='ebijschijner-easy-notification-bar-css' href='/css/debijschijner/assets/library/easy-notification-bar/css/front.css?ver=1.6.1' type='text/css' media='all'/>
-    <link rel='stylesheet' id='debijschijner-custom-extracted-css' href='/css/debijschijner/bijschijner.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='debijschijner-custom-css' href='/css/debijschijner/bijschijner.css' type='text/css' media='all'/>
 
     <link rel='stylesheet' id='missing-global-css' href='/css/gutentor/assets/css/global/global.css?ver=4.0.5' type='text/css' media='all' />
     <link rel='stylesheet' id='missing-widget-global-css' href='/css/gutentor/assets/css/widget/widget-global.css?ver=4.0.5' type='text/css' media='all' />
