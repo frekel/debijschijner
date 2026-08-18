@@ -4,7 +4,7 @@
             fetchpriority="high"
             decoding="async"
             class="price-card-image"
-            src="http://debijschijner.nl/wp-content/uploads/2024/09/logo-e1729264008286.png"
+            src="/images/uploads/2024/09/logo-e1729264008286.png"
             alt=""
             height="300"
             width="465"
