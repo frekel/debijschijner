@@ -12,9 +12,56 @@ class GoogleAnalyticsService
 {
     public function isConfigured(): bool
     {
-        return filled($this->propertyId())
-            && filled($this->serviceAccountPath())
-            && is_file($this->serviceAccountPath());
+        return $this->configurationStatus()['configured'];
+    }
+
+    /**
+     * @return array{configured: bool, message: ?string}
+     */
+    public function configurationStatus(): array
+    {
+        $propertyId = $this->propertyId();
+        $serviceAccountPath = $this->serviceAccountPath();
+
+        if (! $propertyId && ! $serviceAccountPath) {
+            return [
+                'configured' => false,
+                'message' => 'GOOGLE_ANALYTICS_PROPERTY_ID en GOOGLE_ANALYTICS_SERVICE_ACCOUNT_JSON zijn niet ingesteld.',
+            ];
+        }
+
+        if (! $propertyId) {
+            return [
+                'configured' => false,
+                'message' => 'GOOGLE_ANALYTICS_PROPERTY_ID is niet ingesteld.',
+            ];
+        }
+
+        if (! $serviceAccountPath) {
+            return [
+                'configured' => false,
+                'message' => 'GOOGLE_ANALYTICS_SERVICE_ACCOUNT_JSON is niet ingesteld.',
+            ];
+        }
+
+        if (! is_file($serviceAccountPath)) {
+            return [
+                'configured' => false,
+                'message' => sprintf('Het Google Analytics service account bestand bestaat niet op: %s', $serviceAccountPath),
+            ];
+        }
+
+        if (! is_readable($serviceAccountPath)) {
+            return [
+                'configured' => false,
+                'message' => sprintf('Het Google Analytics service account bestand is niet leesbaar op: %s', $serviceAccountPath),
+            ];
+        }
+
+        return [
+            'configured' => true,
+            'message' => null,
+        ];
     }
 
     /**
@@ -22,10 +69,12 @@ class GoogleAnalyticsService
      */
     public function overview(int $days = 30): array
     {
-        if (! $this->isConfigured()) {
+        $configurationStatus = $this->configurationStatus();
+
+        if (! $configurationStatus['configured']) {
             return [
                 'configured' => false,
-                'message' => 'Stel GOOGLE_ANALYTICS_PROPERTY_ID en GOOGLE_ANALYTICS_SERVICE_ACCOUNT_JSON in om GA4-cijfers te tonen.',
+                'message' => $configurationStatus['message'],
                 'metrics' => [],
             ];
         }
@@ -137,6 +186,10 @@ class GoogleAnalyticsService
 
         if (! is_file($path)) {
             throw new RuntimeException('Google Analytics service account JSON ontbreekt.');
+        }
+
+        if (! is_readable($path)) {
+            throw new RuntimeException('Google Analytics service account JSON is niet leesbaar.');
         }
 
         $credentials = json_decode((string) file_get_contents($path), true);

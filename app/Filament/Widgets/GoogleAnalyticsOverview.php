@@ -26,7 +26,7 @@ class GoogleAnalyticsOverview extends StatsOverviewWidget
         if (! $overview['configured']) {
             return [
                 Stat::make('GA4 nog niet gekoppeld', 'Configuratie vereist')
-                    ->description($overview['message'])
+                    ->description($this->formatConfigurationMessage($overview['message']))
                     ->color('warning'),
             ];
         }
@@ -61,5 +61,36 @@ class GoogleAnalyticsOverview extends StatsOverviewWidget
                 ->description('Minuten:seconden')
                 ->color('success'),
         ];
+    }
+
+    protected function formatConfigurationMessage(?string $message): string
+    {
+        return match ($message) {
+            'GOOGLE_ANALYTICS_PROPERTY_ID en GOOGLE_ANALYTICS_SERVICE_ACCOUNT_JSON zijn niet ingesteld.' => 'Stel zowel GOOGLE_ANALYTICS_PROPERTY_ID als GOOGLE_ANALYTICS_SERVICE_ACCOUNT_JSON in.',
+            'GOOGLE_ANALYTICS_PROPERTY_ID is niet ingesteld.' => 'Stel GOOGLE_ANALYTICS_PROPERTY_ID in.',
+            'GOOGLE_ANALYTICS_SERVICE_ACCOUNT_JSON is niet ingesteld.' => 'Stel GOOGLE_ANALYTICS_SERVICE_ACCOUNT_JSON in.',
+            default => $this->formatFileMessage($message),
+        };
+    }
+
+    protected function formatFileMessage(?string $message): string
+    {
+        if (! is_string($message) || $message === '') {
+            return 'Controleer de Google Analytics configuratie.';
+        }
+
+        if (str_starts_with($message, 'Het Google Analytics service account bestand bestaat niet op: ')) {
+            $path = substr($message, strlen('Het Google Analytics service account bestand bestaat niet op: '));
+
+            return 'Het service account bestand bestaat niet: '.$path;
+        }
+
+        if (str_starts_with($message, 'Het Google Analytics service account bestand is niet leesbaar op: ')) {
+            $path = substr($message, strlen('Het Google Analytics service account bestand is niet leesbaar op: '));
+
+            return 'Het service account bestand is niet leesbaar: '.$path;
+        }
+
+        return $message;
     }
 }
