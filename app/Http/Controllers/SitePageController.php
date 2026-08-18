@@ -674,14 +674,14 @@ class SitePageController extends Controller
     private function decorateContactPageHtml(string $html): string
     {
         $html = preg_replace_callback(
-            '/<form\b[^>]*id=["\']wpforms-form-\d+["\'][^>]*>/i',
+            '/<form\b[^>]*id=["\']bsforms-form-\d+["\'][^>]*>/i',
             function (array $matches): string {
                 $tag = $matches[0];
 
                 $tag = preg_replace_callback('/\sclass=("|\')(.*?)\1/i', function (array $classMatches): string {
                     $quote = $classMatches[1];
                     $classes = preg_split('/\s+/', trim($classMatches[2])) ?: [];
-                    $classes = array_values(array_filter($classes, fn (string $class) => $class !== 'wpforms-ajax-form'));
+                    $classes = array_values(array_filter($classes, fn (string $class) => $class !== 'bsforms-ajax-form'));
 
                     return ' class='.$quote.implode(' ', $classes).$quote;
                 }, $tag) ?? $tag;
@@ -698,11 +698,11 @@ class SitePageController extends Controller
             1
         ) ?? $html;
 
-        $html = preg_replace('/<script[^>]+wpforms[^>]*>.*?<\/script>/is', '', $html) ?? $html;
-        $html = preg_replace('/<script[^>]+src=["\'][^"\']*wpforms-lite\/assets\/js\/[^"\']*["\'][^>]*><\/script>/is', '', $html) ?? $html;
+        $html = preg_replace('/<script[^>]+bsforms[^>]*>.*?<\/script>/is', '', $html) ?? $html;
+        $html = preg_replace('/<script[^>]+src=["\'][^"\']*bsforms-lite\/assets\/js\/[^"\']*["\'][^>]*><\/script>/is', '', $html) ?? $html;
 
         $html = preg_replace(
-            '/(<form\b[^>]*id=["\']wpforms-form-\d+["\'][^>]*>)/i',
+            '/(<form\b[^>]*id=["\']bsforms-form-\d+["\'][^>]*>)/i',
             '$1'.csrf_field(),
             $html,
             1
@@ -712,7 +712,7 @@ class SitePageController extends Controller
 
         if ($feedback !== '') {
             $html = preg_replace(
-                '/(<div class="wpforms-container[^>]*>)/i',
+                '/(<div class="bsforms-container[^>]*>)/i',
                 $feedback.'$1',
                 $html,
                 1
@@ -730,14 +730,14 @@ class SitePageController extends Controller
     private function decorateApplyPageHtml(string $html): string
     {
         $html = preg_replace_callback(
-            '/<form\b[^>]*id=["\']wpforms-form-\d+["\'][^>]*>/i',
+            '/<form\b[^>]*id=["\']bsforms-form-\d+["\'][^>]*>/i',
             function (array $matches): string {
                 $tag = $matches[0];
 
                 $tag = preg_replace_callback('/\sclass=("|\')(.*?)\1/i', function (array $classMatches): string {
                     $quote = $classMatches[1];
                     $classes = preg_split('/\s+/', trim($classMatches[2])) ?: [];
-                    $classes = array_values(array_filter($classes, fn (string $class) => $class !== 'wpforms-ajax-form'));
+                    $classes = array_values(array_filter($classes, fn (string $class) => $class !== 'bsforms-ajax-form'));
 
                     return ' class='.$quote.implode(' ', $classes).$quote;
                 }, $tag) ?? $tag;
@@ -754,11 +754,11 @@ class SitePageController extends Controller
             1
         ) ?? $html;
 
-        $html = preg_replace('/<script[^>]+wpforms[^>]*>.*?<\/script>/is', '', $html) ?? $html;
-        $html = preg_replace('/<script[^>]+src=["\'][^"\']*wpforms-lite\/assets\/js\/[^"\']*["\'][^>]*><\/script>/is', '', $html) ?? $html;
+        $html = preg_replace('/<script[^>]+bsforms[^>]*>.*?<\/script>/is', '', $html) ?? $html;
+        $html = preg_replace('/<script[^>]+src=["\'][^"\']*bsforms-lite\/assets\/js\/[^"\']*["\'][^>]*><\/script>/is', '', $html) ?? $html;
 
         $html = preg_replace(
-            '/(<form\b[^>]*id=["\']wpforms-form-\d+["\'][^>]*>)/i',
+            '/(<form\b[^>]*id=["\']bsforms-form-\d+["\'][^>]*>)/i',
             '$1'.csrf_field(),
             $html,
             1
@@ -768,7 +768,7 @@ class SitePageController extends Controller
 
         if ($feedback !== '') {
             $html = preg_replace(
-                '/(<div class="wpforms-container[^>]*>)/i',
+                '/(<div class="bsforms-container[^>]*>)/i',
                 $feedback.'$1',
                 $html,
                 1

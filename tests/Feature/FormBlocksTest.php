@@ -33,8 +33,8 @@ class FormBlocksTest extends TestCase
             ->assertSeeText('Adres')
             ->assertSeeText('Overige')
             ->assertSee('action="'.route('contact.submit').'"', false)
-            ->assertSee('name="wpforms[fields][0][first]"', false)
-            ->assertDontSee('wpforms-field-container', false)
+            ->assertSee('name="bsforms[fields][0][first]"', false)
+            ->assertDontSee('bsforms-field-container', false)
             ->assertSee('_token', false);
     }
 
@@ -61,8 +61,8 @@ class FormBlocksTest extends TestCase
             ->assertSeeText('Adres')
             ->assertSeeText('Overige')
             ->assertSee('action="'.route('apply.submit').'"', false)
-            ->assertSee('name="wpforms[fields][10]"', false)
-            ->assertDontSee('wpforms-field-container', false)
+            ->assertSee('name="bsforms[fields][10]"', false)
+            ->assertDontSee('bsforms-field-container', false)
             ->assertSee('_token', false);
     }
 }

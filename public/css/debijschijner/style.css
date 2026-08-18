@@ -1231,14 +1231,14 @@ object {
     left: -4px;
 }
 
-.wpforms-submit {
+.bsforms-submit {
     background-color: #fbc531 !important;
     border-color: #F7B80D !important;
     color: #fff !important;
     transition: background 0.3s ease-in-out;
 }
 
-.wpforms-submit:hover {
+.bsforms-submit:hover {
     background-color: #F7B80D !important;
 }
 
@@ -1532,7 +1532,7 @@ object {
         width: 96%;
     }
     .site-content-full-screen {
-        width: 92%; 
+        width: 92%;
     }
 }
 

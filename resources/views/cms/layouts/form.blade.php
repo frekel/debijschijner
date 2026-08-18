@@ -53,7 +53,7 @@
                                             </article>
                                             <article class="cms-form-info-card">
                                                 <div class="cms-form-info-card-text">
-                                                    Jouw contactgegevens gebruik ik alleen om contact met je op te nemen. Zie hiervoor ook mijn <a href="https://debijschijner.nl/privacy-policy/" data-type="page" data-id="3">privacyverklaring</a>
+                                                    Jouw contactgegevens gebruik ik alleen om contact met je op te nemen. Zie hiervoor ook mijn <a href="/privacy-policy/" data-type="page" data-id="3">privacyverklaring</a>
                                                 </div>
                                             </article>
                                         </div>
