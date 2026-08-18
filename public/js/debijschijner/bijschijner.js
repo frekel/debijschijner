@@ -1,39 +1,3 @@
-// Google Analytics Consent Mode Setup
-window.dataLayer = window.dataLayer || [];
-
-function gtag() {
-    dataLayer.push(arguments);
-}
-
-gtag('consent', 'default', {
-    "ad_personalization": "denied",
-    "ad_storage": "denied",
-    "ad_user_data": "denied",
-    "analytics_storage": "denied",
-    "functionality_storage": "denied",
-    "security_storage": "denied",
-    "personalization_storage": "denied",
-    "region": ["AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"],
-    "wait_for_update": 500
-});
-window._googlesitekitConsentCategoryMap = {
-    "statistics": ["analytics_storage"],
-    "marketing": ["ad_storage", "ad_user_data", "ad_personalization"],
-    "functional": ["functionality_storage", "security_storage"],
-    "preferences": ["personalization_storage"]
-};
-window._googlesitekitConsents = {
-    "ad_personalization": "denied",
-    "ad_storage": "denied",
-    "ad_user_data": "denied",
-    "analytics_storage": "denied",
-    "functionality_storage": "denied",
-    "security_storage": "denied",
-    "personalization_storage": "denied",
-    "region": ["AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"],
-    "wait_for_update": 500
-};
-
 // WordPress Emoji Settings
 window._wpemojiSettings = {
     "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/",
@@ -127,15 +91,6 @@ window._wpemojiSettings = {
         n.supports.everything || (n.readyCallback(), (e = n.source || {}).concatemoji ? t(e.concatemoji) : e.wpemoji && e.twemoji && (t(e.twemoji), t(e.wpemoji)))
     }))
 }((window, document), window._wpemojiSettings);
-
-// Google Analytics Config
-gtag("set", "linker", {"domains": ["debijschijner.nl"]});
-gtag("js", new Date());
-gtag("set", "developer_id.dZTNiMT", true);
-gtag("config", "GT-TX9T54P6");
-
-// Consent API Config
-var consent_api = {"consent_type":"","waitfor_consent_hook":"","cookie_expiration":"30","cookie_prefix":"wp_consent","services":[]};
 
 // Gutentor Config
 var gutentorLS = {"fontAwesomeVersion":"5","restNonce":"85ac916484","restUrl":"https:\/\/debijschijner.nl\/wp-json\/"};
