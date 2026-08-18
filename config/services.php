@@ -40,6 +40,8 @@ return [
         'measurement_id' => env('GOOGLE_MEASUREMENT_ID', 'G-GJLRCM270Y'),
         'linker_domains' => array_values(array_filter(array_map('trim', explode(',', env('GOOGLE_LINKER_DOMAINS', 'debijschijner.nl'))))),
         'developer_id' => env('GOOGLE_DEVELOPER_ID', 'dZTNiMT'),
+        'property_id' => env('GOOGLE_ANALYTICS_PROPERTY_ID'),
+        'service_account_json' => env('GOOGLE_ANALYTICS_SERVICE_ACCOUNT_JSON'),
     ],
 
 ];
