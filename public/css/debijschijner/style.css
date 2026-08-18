@@ -1231,14 +1231,14 @@ object {
     left: -4px;
 }
 
-.wpforms-submit {
+.bsforms-submit {
     background-color: #fbc531 !important;
     border-color: #F7B80D !important;
     color: #fff !important;
     transition: background 0.3s ease-in-out;
 }
 
-.wpforms-submit:hover {
+.bsforms-submit:hover {
     background-color: #F7B80D !important;
 }
 
@@ -1509,6 +1509,11 @@ object {
     width: 90%;
 }
 
+.site-content-full-screen {
+    margin: 0 auto;
+    width: 98%;
+}
+
 #primary {
     float: left;
     width: 69.5%;
@@ -1525,6 +1530,9 @@ object {
 @media only screen and (max-width: 1170px){
     .site-content{
         width: 96%;
+    }
+    .site-content-full-screen {
+        width: 92%;
     }
 }
 
@@ -2082,11 +2090,15 @@ article.page .read-more {
     }
 
     .inner-main-title {
-        height: 200px !important;
-        padding-top: 120px !important;
+        height: 110px !important;
+        padding-top: 110px !important;
     }
 
     .site-content {
+        margin-top: 0;
+    }
+
+    .site-content-full-screen {
         margin-top: 0;
     }
 
@@ -2112,7 +2124,7 @@ article.page .read-more {
     text-decoration: underline;
 }
 
-.gutentor-timeline-wrapper {
+.timeline-wrapper {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }

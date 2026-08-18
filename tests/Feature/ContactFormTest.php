@@ -12,7 +12,7 @@ class ContactFormTest extends TestCase
 
         $response = $this->withSession(['_token' => $token])->post('/contact', [
             '_token' => $token,
-            'wpforms' => [
+            'bsforms' => [
                 'fields' => [
                     0 => [
                         'first' => 'Debora',
@@ -37,7 +37,7 @@ class ContactFormTest extends TestCase
 
         $response = $this->withSession(['_token' => $token])->from('/contact')->post('/contact', [
             '_token' => $token,
-            'wpforms' => [
+            'bsforms' => [
                 'fields' => [
                     0 => [
                         'first' => '',
@@ -53,11 +53,11 @@ class ContactFormTest extends TestCase
         $response
             ->assertRedirect('/contact')
             ->assertSessionHasErrors([
-                'wpforms.fields.0.first',
-                'wpforms.fields.0.last',
-                'wpforms.fields.1',
-                'wpforms.fields.3',
-                'wpforms.fields.9',
+                'bsforms.fields.0.first',
+                'bsforms.fields.0.last',
+                'bsforms.fields.1',
+                'bsforms.fields.3',
+                'bsforms.fields.9',
             ]);
     }
 }

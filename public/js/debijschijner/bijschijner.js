@@ -1,0 +1,226 @@
+// Google Analytics Consent Mode Setup
+window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+    dataLayer.push(arguments);
+}
+
+gtag('consent', 'default', {
+    "ad_personalization": "denied",
+    "ad_storage": "denied",
+    "ad_user_data": "denied",
+    "analytics_storage": "denied",
+    "functionality_storage": "denied",
+    "security_storage": "denied",
+    "personalization_storage": "denied",
+    "region": ["AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"],
+    "wait_for_update": 500
+});
+window._googlesitekitConsentCategoryMap = {
+    "statistics": ["analytics_storage"],
+    "marketing": ["ad_storage", "ad_user_data", "ad_personalization"],
+    "functional": ["functionality_storage", "security_storage"],
+    "preferences": ["personalization_storage"]
+};
+window._googlesitekitConsents = {
+    "ad_personalization": "denied",
+    "ad_storage": "denied",
+    "ad_user_data": "denied",
+    "analytics_storage": "denied",
+    "functionality_storage": "denied",
+    "security_storage": "denied",
+    "personalization_storage": "denied",
+    "region": ["AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"],
+    "wait_for_update": 500
+};
+
+// WordPress Emoji Settings
+window._wpemojiSettings = {
+    "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/",
+    "ext": ".png",
+    "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/",
+    "svgExt": ".svg",
+    "source": {"concatemoji": "https:\/\/debijschijner.nl\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.6.2"}
+};
+
+/*! This file is auto-generated */
+!function (i, n) {
+    var o, s, e;
+
+    function c(e) {
+        try {
+            var t = {supportTests: e, timestamp: (new Date).valueOf()};
+            sessionStorage.setItem(o, JSON.stringify(t))
+        } catch (e) {
+        }
+    }
+
+    function p(e, t, n) {
+        e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(t, 0, 0);
+        var t = new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data),
+            r = (e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(n, 0, 0), new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data));
+        return t.every(function (e, t) {
+            return e === r[t]
+        })
+    }
+
+    function u(e, t, n) {
+        switch (t) {
+            case"flag":
+                return n(e, "\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f", "\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f") ? !1 : !n(e, "\ud83c\uddfa\ud83c\uddf3", "\ud83c\uddfa\u200b\ud83c\uddf3") && !n(e, "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f", "\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");
+            case"emoji":
+                return !n(e, "\ud83d\udc26\u200d\u2b1b", "\ud83d\udc26\u200b\u2b1b")
+        }
+        return !1
+    }
+
+    function f(e, t, n) {
+        var r = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? new OffscreenCanvas(300, 150) : i.createElement("canvas"),
+            a = r.getContext("2d", {willReadFrequently: !0}),
+            o = (a.textBaseline = "top", a.font = "600 32px Arial", {});
+        return e.forEach(function (e) {
+            o[e] = t(a, e, n)
+        }), o
+    }
+
+    function t(e) {
+        var t = i.createElement("script");
+        t.src = e, t.defer = !0, i.head.appendChild(t)
+    }
+
+    "undefined" != typeof Promise && (o = "wpEmojiSettingsSupports", s = ["flag", "emoji"], n.supports = {
+        everything: !0,
+        everythingExceptFlag: !0
+    }, e = new Promise(function (e) {
+        i.addEventListener("DOMContentLoaded", e, {once: !0})
+    }), new Promise(function (t) {
+        var n = function () {
+            try {
+                var e = JSON.parse(sessionStorage.getItem(o));
+                if ("object" == typeof e && "number" == typeof e.timestamp && (new Date).valueOf() < e.timestamp + 604800 && "object" == typeof e.supportTests) return e.supportTests
+            } catch (e) {
+            }
+            return null
+        }();
+        if (!n) {
+            if ("undefined" != typeof Worker && "undefined" != typeof OffscreenCanvas && "undefined" != typeof URL && URL.createObjectURL && "undefined" != typeof Blob) try {
+                var e = "postMessage(" + f.toString() + "(" + [JSON.stringify(s), u.toString(), p.toString()].join(",") + "));",
+                    r = new Blob([e], {type: "text/javascript"}),
+                    a = new Worker(URL.createObjectURL(r), {name: "wpTestEmojiSupports"});
+                return void (a.onmessage = function (e) {
+                    c(n = e.data), a.terminate(), t(n)
+                })
+            } catch (e) {
+            }
+            c(n = f(s, u, p))
+        }
+        t(n)
+    }).then(function (e) {
+        for (var t in e) n.supports[t] = e[t], n.supports.everything = n.supports.everything && n.supports[t], "flag" !== t && (n.supports.everythingExceptFlag = n.supports.everythingExceptFlag && n.supports[t]);
+        n.supports.everythingExceptFlag = n.supports.everythingExceptFlag && !n.supports.flag, n.DOMReady = !1, n.readyCallback = function () {
+            n.DOMReady = !0
+        }
+    }).then(function () {
+        return e
+    }).then(function () {
+        var e;
+        n.supports.everything || (n.readyCallback(), (e = n.source || {}).concatemoji ? t(e.concatemoji) : e.wpemoji && e.twemoji && (t(e.twemoji), t(e.wpemoji)))
+    }))
+}((window, document), window._wpemojiSettings);
+
+// Google Analytics Config
+gtag("set", "linker", {"domains": ["debijschijner.nl"]});
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "GT-TX9T54P6");
+
+// Consent API Config
+var consent_api = {"consent_type":"","waitfor_consent_hook":"","cookie_expiration":"30","cookie_prefix":"wp_consent","services":[]};
+
+// Gutentor Config
+var gutentorLS = {"fontAwesomeVersion":"5","restNonce":"85ac916484","restUrl":"https:\/\/debijschijner.nl\/wp-json\/"};
+
+document.addEventListener('DOMContentLoaded', function () {
+    var carousels = document.querySelectorAll('[data-review-carousel]');
+
+    carousels.forEach(function (carousel) {
+        var viewport = carousel.querySelector('.reviews-viewport');
+        var track = carousel.querySelector('.reviews-track');
+        var prevButton = carousel.querySelector('[data-review-prev]');
+        var nextButton = carousel.querySelector('[data-review-next]');
+        var cards = track ? track.querySelectorAll('.review-card') : [];
+        var index = 0;
+
+        if (!viewport || !track || !prevButton || !nextButton || cards.length === 0) {
+            return;
+        }
+
+        var visibleCount = function () {
+            if (window.innerWidth <= 640) {
+                return 1;
+            }
+
+            if (window.innerWidth <= 991) {
+                return 2;
+            }
+
+            return 3;
+        };
+
+        var maxIndex = function () {
+            return Math.max(0, cards.length - visibleCount());
+        };
+
+        var stepWidth = function () {
+            if (cards.length === 0) {
+                return 0;
+            }
+
+            var styles = window.getComputedStyle(track);
+            var gap = parseFloat(styles.gap || styles.columnGap || '0') || 0;
+            var cardWidth = cards[0].getBoundingClientRect().width;
+
+            if (cardWidth === 0) {
+                cardWidth = viewport.getBoundingClientRect().width / visibleCount();
+            }
+
+            return cardWidth + gap;
+        };
+
+        var update = function () {
+            var max = maxIndex();
+
+            if (index > max) {
+                index = 0;
+            }
+
+            var offset = stepWidth() * index;
+            track.style.transform = 'translateX(-' + offset + 'px)';
+        };
+
+        prevButton.addEventListener('click', function () {
+            var max = maxIndex();
+
+            if (max === 0) {
+                return;
+            }
+
+            index = index <= 0 ? max : index - 1;
+            update();
+        });
+
+        nextButton.addEventListener('click', function () {
+            var max = maxIndex();
+
+            if (max === 0) {
+                return;
+            }
+
+            index = index >= max ? 0 : index + 1;
+            update();
+        });
+
+        window.addEventListener('resize', update);
+        update();
+    });
+});

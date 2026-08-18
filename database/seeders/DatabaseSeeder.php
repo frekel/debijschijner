@@ -14,8 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            PageSeeder::class,
-        ]);
+        // Intentionally empty: the application no longer seeds pages from
+        // legacy migrated HTML source files.
     }
 }
