@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'google_analytics' => [
+        'tag_id' => env('GOOGLE_TAG_ID', 'GT-TX9T54P6'),
+        'measurement_id' => env('GOOGLE_MEASUREMENT_ID', 'G-GJLRCM270Y'),
+        'linker_domains' => array_values(array_filter(array_map('trim', explode(',', env('GOOGLE_LINKER_DOMAINS', 'debijschijner.nl'))))),
+        'developer_id' => env('GOOGLE_DEVELOPER_ID', 'dZTNiMT'),
+    ],
+
 ];

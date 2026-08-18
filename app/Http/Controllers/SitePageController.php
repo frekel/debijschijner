@@ -679,12 +679,6 @@ class SitePageController extends Controller
             return 'href='.$quote.$local.$quote;
         }, $html) ?? $html;
 
-        $html = preg_replace_callback('/src=("|\')https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=GT-TX9T54P6\1/i', function (array $matches): string {
-            $quote = $matches[1];
-
-            return 'src='.$quote.'/js/external/googletag/gtag.js'.$quote;
-        }, $html) ?? $html;
-
         return $html;
     }
 
