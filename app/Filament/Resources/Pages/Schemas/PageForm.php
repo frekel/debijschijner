@@ -37,6 +37,7 @@ class PageForm
                                 'default' => 'Default',
                                 'homepage' => 'Homepage',
                                 'full_screen' => 'Full screen',
+                                'form' => 'Form',
                             ])
                             ->default('default')
                             ->required()
@@ -45,15 +46,35 @@ class PageForm
                             ->label('Gepubliceerd')
                             ->default(true)
                             ->helperText('Pagina is zichtbaar voor bezoekers'),
+                        Toggle::make('show_in_menu')
+                            ->label('Tonen in menu')
+                            ->default(true)
+                            ->helperText('Bepaalt of deze pagina in het hoofdmenu zichtbaar is.'),
                     ]),
-                Section::make('HTML Inhoud')
+                Section::make('SEO')
                     ->schema([
-                        Textarea::make('html')
-                            ->label('Legacy HTML')
-                            ->required()
-                            ->rows(20)
-                            ->columnSpanFull()
-                            ->helperText('Bestaande volledige HTML. Wordt gebruikt als er geen CMS-blokken zijn.'),
+                        TextInput::make('meta_title')
+                            ->label('Meta title')
+                            ->maxLength(70),
+                        Textarea::make('meta_description')
+                            ->label('Meta description')
+                            ->rows(3)
+                            ->maxLength(170),
+                        FileUpload::make('og_image')
+                            ->label('OG afbeelding')
+                            ->image()
+                            ->disk('public')
+                            ->directory('seo'),
+                        TextInput::make('canonical_url')
+                            ->label('Canonical URL')
+                            ->url(),
+                    ]),
+                Section::make('Form template')
+                    ->visible(fn (callable $get): bool => ($get('template') ?? 'default') === 'form')
+                    ->schema([
+                        TextInput::make('form_title')
+                            ->label('Form titel')
+                            ->default('Neem contact op'),
                     ]),
                 Section::make('CMS Inhoud (Nieuw)')
                     ->schema([
@@ -170,53 +191,23 @@ class PageForm
                                             ->rows(6)
                                             ->required(),
                                     ]),
-                                Block::make('review')
-                                    ->label('Review')
-                                    ->schema([
-                                        TextInput::make('reviewer_name')
-                                            ->label('Naam reviewer')
-                                            ->required(),
-                                        TextInput::make('button_text')
-                                            ->label('Button tekst')
-                                            ->helperText('Tekst onder de naam reviewer (optioneel).'),
-                                        TextInput::make('title')
-                                            ->label('Kop')
-                                            ->required(),
-                                        FileUpload::make('image')
-                                            ->label('Afbeelding')
-                                            ->image()
-                                            ->disk('public_uploads')
-                                            ->directory(fn (): string => now()->format('Y/m'))
-                                            ->preserveFilenames()
-                                            ->required(),
-                                        Textarea::make('text')
-                                            ->label('Tekst')
-                                            ->rows(6)
-                                            ->required(),
-                                    ]),
+                                Block::make('reviews')
+                                    ->label('Reviews')
+                                    ->schema([]),
+                                Block::make('publications')
+                                    ->label('Publicaties')
+                                    ->schema([]),
+                                Block::make('contact_form')
+                                    ->label('Contact formulier')
+                                    ->schema([]),
+                                Block::make('apply_form')
+                                    ->label('Aanvraagformulier')
+                                    ->schema([]),
                             ])
                             ->addActionLabel('Blok toevoegen')
                             ->collapsible()
                             ->columnSpanFull()
-                            ->helperText('Wanneer je hier blokken toevoegt, gebruikt de frontend deze CMS-opmaak in plaats van de legacy HTML.'),
-                    ]),
-                Section::make('SEO')
-                    ->schema([
-                        TextInput::make('meta_title')
-                            ->label('Meta title')
-                            ->maxLength(70),
-                        Textarea::make('meta_description')
-                            ->label('Meta description')
-                            ->rows(3)
-                            ->maxLength(170),
-                        FileUpload::make('og_image')
-                            ->label('OG afbeelding')
-                            ->image()
-                            ->disk('public')
-                            ->directory('seo'),
-                        TextInput::make('canonical_url')
-                            ->label('Canonical URL')
-                            ->url(),
+                                ->helperText('Wanneer je hier blokken toevoegt, gebruikt de frontend deze CMS-opmaak.'),
                     ]),
             ]);
     }

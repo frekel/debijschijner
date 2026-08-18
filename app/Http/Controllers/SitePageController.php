@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\File;
+use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class SitePageController extends Controller
@@ -15,6 +15,26 @@ class SitePageController extends Controller
     {
         $normalizedPath = trim($path, '/');
         $slug = $normalizedPath === '' ? 'home' : $normalizedPath;
+
+        if ($normalizedPath === 'publicaties') {
+            return redirect('/over-mij/publicaties', 301);
+        }
+
+        if (Str::startsWith($normalizedPath, 'publicaties/')) {
+            return redirect('/over-mij/publicaties/'.trim(Str::after($normalizedPath, 'publicaties/'), '/'), 301);
+        }
+
+        if (Str::startsWith($normalizedPath, 'over-mij/publicaties/')) {
+            return $this->renderPublicationPageResponse($normalizedPath);
+        }
+
+        if (Str::startsWith($normalizedPath, 'ervaringen/')) {
+            $reviewerResponse = $this->renderReviewerPageResponse($normalizedPath);
+
+            if ($reviewerResponse instanceof Response) {
+                return $reviewerResponse;
+            }
+        }
 
         try {
             $page = Page::query()
@@ -26,66 +46,122 @@ class SitePageController extends Controller
         }
 
         if ($page) {
-            if ($this->hasContentBlocks($page)) {
-                $html = view('cms.page', [
-                    'layoutView' => $this->resolveLayoutView((string) ($page->template ?? 'default')),
-                    'page' => $page,
-                    'title' => $page->meta_title ?: $page->title,
-                    'metaDescription' => $page->meta_description,
-                    'canonicalUrl' => $page->canonical_url,
-                    'ogImage' => $this->resolvePublicUrl($page->og_image),
-                    'contentHtml' => $this->renderBlocks($page->content_blocks ?? []),
-                ])->render();
-
-                return response($html, 200, [
-                    'Content-Type' => 'text/html; charset=UTF-8',
-                ]);
-            }
-
-            $html = $slug === 'contact'
-                ? $this->decorateContactPageHtml($page->html)
-                : ($slug === 'aanvraag' ? $this->decorateApplyPageHtml($page->html) : $page->html);
-
-            $html = $this->applySeoMetadata($html, $page);
-
-            $html = $this->localizeExternalAssetReferences($html);
+            $html = view('cms.page', [
+                'layoutView' => $this->resolveLayoutView((string) ($page->template ?? 'default')),
+                'page' => $page,
+                'title' => $page->meta_title ?: $page->title,
+                'metaDescription' => $page->meta_description,
+                'canonicalUrl' => $page->canonical_url,
+                'ogImage' => $this->resolvePublicUrl($page->og_image),
+                'contentHtml' => $this->renderBlocks($page->content_blocks ?? []),
+            ])->render();
 
             return response($html, 200, [
                 'Content-Type' => 'text/html; charset=UTF-8',
             ]);
         }
 
-        $candidates = $normalizedPath === ''
-            ? ['home.html']
-            : [
-                $normalizedPath.'.html',
-                str_replace('/', '__', $normalizedPath).'.html',
-            ];
+        abort(404);
+    }
 
-        $filePath = null;
+    private function renderPublicationsIndexResponse(): Response
+    {
+        $page = $this->findPublishedPage('over-mij/publicaties');
+        $publications = Post::query()
+            ->published()
+            ->ofType('publicatie')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
 
-        foreach ($candidates as $candidate) {
-            $candidatePath = resource_path('migrated/site/'.$candidate);
+        $contentHtml = view('cms.posts.publications-index', [
+            'publications' => $publications,
+            'resolvePublicationUrl' => fn (Post $post): string => '/over-mij/publicaties/'.$this->publicationSlug($post),
+            'resolveImageUrl' => fn (?string $path): ?string => $this->resolvePublicUrl($path),
+        ])->render();
 
-            if (File::exists($candidatePath)) {
-                $filePath = $candidatePath;
-                break;
-            }
-        }
+        $html = view('cms.page', [
+            'layoutView' => $this->resolveLayoutView((string) ($page->template ?? 'default')),
+            'page' => $page,
+            'title' => $page?->meta_title ?: $page?->title ?: 'Publicaties',
+            'metaDescription' => $page?->meta_description ?: 'Publicaties',
+            'canonicalUrl' => $page?->canonical_url ?: url('/over-mij/publicaties'),
+            'ogImage' => $this->resolvePublicUrl($page?->og_image),
+            'contentHtml' => $contentHtml,
+        ])->render();
 
-        if (! $filePath) {
+        return response($html, 200, [
+            'Content-Type' => 'text/html; charset=UTF-8',
+        ]);
+    }
+
+    private function renderPublicationPageResponse(string $normalizedPath): Response
+    {
+        $publicationSlug = trim(Str::after($normalizedPath, 'over-mij/publicaties/'), '/');
+        $publication = Post::query()
+            ->published()
+            ->ofType('publicatie')
+            ->get()
+            ->first(fn (Post $post): bool => $this->publicationSlug($post) === $publicationSlug);
+
+        if (! $publication) {
             abort(404);
         }
 
-        $html = File::get($filePath);
+        $contentHtml = view('cms.posts.publication-detail', [
+            'publication' => $publication,
+            'image' => $this->resolvePublicUrl($publication->image),
+        ])->render();
 
-        if ($slug === 'contact') {
-            $html = $this->decorateContactPageHtml($html);
-        } elseif ($slug === 'aanvraag') {
-            $html = $this->decorateApplyPageHtml($html);
+        $html = view('cms.page', [
+            'layoutView' => 'cms.layouts.default',
+            'title' => (string) ($publication->title ?? 'Publicatie'),
+            'metaDescription' => strip_tags((string) ($publication->text ?? '')),
+            'canonicalUrl' => url('/over-mij/publicaties/'.$publicationSlug),
+            'ogImage' => $this->resolvePublicUrl($publication->image),
+            'contentHtml' => $contentHtml,
+            'page' => null,
+        ])->render();
+
+        return response($html, 200, [
+            'Content-Type' => 'text/html; charset=UTF-8',
+        ]);
+    }
+
+    private function renderReviewerPageResponse(string $normalizedPath): ?Response
+    {
+        $reviewerSlug = trim(Str::after($normalizedPath, 'ervaringen/'), '/');
+
+        if ($reviewerSlug === '') {
+            return null;
         }
 
-        $html = $this->localizeExternalAssetReferences($html);
+        $reviewer = Post::query()
+            ->published()
+            ->ofType('reviewer')
+            ->get()
+            ->first(fn (Post $post): bool => $this->reviewerSlug($post) === $reviewerSlug);
+
+        if (! $reviewer) {
+            abort(404);
+        }
+
+        $contentHtml = view('cms.posts.reviewer-detail', [
+            'title' => (string) ($reviewer->title ?? ''),
+            'text' => (string) ($reviewer->text ?? ''),
+            'image' => $this->resolvePublicUrl($reviewer->image),
+            'reviewerName' => trim((string) ($reviewer->name ?? '')),
+        ])->render();
+
+        $html = view('cms.page', [
+            'layoutView' => 'cms.layouts.default',
+            'title' => trim((string) ($reviewer->name ?? '')),
+            'metaDescription' => (string) ($reviewer->text ?? ''),
+            'canonicalUrl' => url('/ervaringen/'.$reviewerSlug),
+            'ogImage' => $this->resolvePublicUrl($reviewer->image),
+            'contentHtml' => $contentHtml,
+            'page' => null,
+        ])->render();
 
         return response($html, 200, [
             'Content-Type' => 'text/html; charset=UTF-8',
@@ -103,7 +179,8 @@ class SitePageController extends Controller
         $processPostIndex = 0;
         $processPostItems = '';
         $pricesItems = '';
-        $reviewItems = '';
+        $hasReviewsGroup = false;
+        $hasPublicationsGroup = false;
 
         foreach ($blocks as $block) {
             $type = $block['type'] ?? '';
@@ -114,9 +191,14 @@ class SitePageController extends Controller
                     $pricesItems = '';
                 }
 
-                if ($reviewItems !== '') {
-                    $html .= $this->renderReviewsGroup($reviewItems);
-                    $reviewItems = '';
+                if ($hasPublicationsGroup) {
+                    $html .= $this->renderPublicationsGroup();
+                    $hasPublicationsGroup = false;
+                }
+
+                if ($hasReviewsGroup) {
+                    $html .= $this->renderReviewsGroup();
+                    $hasReviewsGroup = false;
                 }
 
                 $data = is_array($block['data'] ?? null) ? $block['data'] : [];
@@ -131,9 +213,14 @@ class SitePageController extends Controller
                     $processPostItems = '';
                 }
 
-                if ($reviewItems !== '') {
-                    $html .= $this->renderReviewsGroup($reviewItems);
-                    $reviewItems = '';
+                if ($hasPublicationsGroup) {
+                    $html .= $this->renderPublicationsGroup();
+                    $hasPublicationsGroup = false;
+                }
+
+                if ($hasReviewsGroup) {
+                    $html .= $this->renderReviewsGroup();
+                    $hasReviewsGroup = false;
                 }
 
                 $data = is_array($block['data'] ?? null) ? $block['data'] : [];
@@ -142,7 +229,7 @@ class SitePageController extends Controller
                 continue;
             }
 
-            if ($type === 'review') {
+            if (in_array($type, ['review', 'reviews'], true)) {
                 if ($processPostItems !== '') {
                     $html .= $this->renderProcessPostGroup($processPostItems);
                     $processPostItems = '';
@@ -153,8 +240,30 @@ class SitePageController extends Controller
                     $pricesItems = '';
                 }
 
-                $data = is_array($block['data'] ?? null) ? $block['data'] : [];
-                $reviewItems .= $this->renderReviewBlock($data);
+                // The page only controls the position of this group. Its contents
+                // are managed independently as reviewer posts.
+                $hasReviewsGroup = true;
+
+                continue;
+            }
+
+            if (in_array($type, ['publications', 'publicaties'], true)) {
+                if ($processPostItems !== '') {
+                    $html .= $this->renderProcessPostGroup($processPostItems);
+                    $processPostItems = '';
+                }
+
+                if ($pricesItems !== '') {
+                    $html .= $this->renderPricesGroup($pricesItems);
+                    $pricesItems = '';
+                }
+
+                if ($hasReviewsGroup) {
+                    $html .= $this->renderReviewsGroup();
+                    $hasReviewsGroup = false;
+                }
+
+                $hasPublicationsGroup = true;
 
                 continue;
             }
@@ -169,9 +278,14 @@ class SitePageController extends Controller
                 $pricesItems = '';
             }
 
-            if ($reviewItems !== '') {
-                $html .= $this->renderReviewsGroup($reviewItems);
-                $reviewItems = '';
+            if ($hasPublicationsGroup) {
+                $html .= $this->renderPublicationsGroup();
+                $hasPublicationsGroup = false;
+            }
+
+            if ($hasReviewsGroup) {
+                $html .= $this->renderReviewsGroup();
+                $hasReviewsGroup = false;
             }
 
             $html .= $this->renderBlock($block, $processPostIndex);
@@ -185,8 +299,12 @@ class SitePageController extends Controller
             $html .= $this->renderPricesGroup($pricesItems);
         }
 
-        if ($reviewItems !== '') {
-            $html .= $this->renderReviewsGroup($reviewItems);
+        if ($hasPublicationsGroup) {
+            $html .= $this->renderPublicationsGroup();
+        }
+
+        if ($hasReviewsGroup) {
+            $html .= $this->renderReviewsGroup();
         }
 
         return $html;
@@ -206,10 +324,50 @@ class SitePageController extends Controller
         ])->render();
     }
 
-    private function renderReviewsGroup(string $itemsHtml): string
+    private function renderReviewsGroup(): string
     {
+        $itemsHtml = Post::query()
+            ->published()
+            ->ofType('reviewer')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get()
+            ->map(fn (Post $post): string => $this->renderReviewBlock([
+                'reviewer_slug' => $this->reviewerSlug($post),
+                'reviewer_name' => $post->name,
+                'button_text' => $post->button_text,
+                'title' => $post->title,
+                'image' => $post->image,
+                'text' => $post->text,
+            ]))
+            ->implode('');
+
+        if ($itemsHtml === '') {
+            return '';
+        }
+
         return view('cms.groups.reviews', [
             'itemsHtml' => $itemsHtml,
+        ])->render();
+    }
+
+    private function renderPublicationsGroup(): string
+    {
+        $publications = Post::query()
+            ->published()
+            ->ofType('publicatie')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        if ($publications->isEmpty()) {
+            return '';
+        }
+
+        return view('cms.posts.publications-index', [
+            'publications' => $publications,
+            'resolvePublicationUrl' => fn (Post $post): string => '/over-mij/publicaties/'.$this->publicationSlug($post),
+            'resolveImageUrl' => fn (?string $path): ?string => $this->resolvePublicUrl($path),
         ])->render();
     }
 
@@ -225,7 +383,10 @@ class SitePageController extends Controller
             'homepage_post' => $this->renderHomePagePostBlock($data),
             'process_post' => $this->renderProcessPostBlock($data, $processPostIndex++),
             'prices' => $this->renderPricesBlock($data),
-            'review' => $this->renderReviewBlock($data),
+            'review', 'reviews' => $this->renderReviewsGroup(),
+            'publications', 'publicaties' => $this->renderPublicationsGroup(),
+            'contact_form' => $this->renderContactFormBlock(),
+            'apply_form' => $this->renderApplyFormBlock(),
             default => '',
         };
     }
@@ -305,12 +466,57 @@ class SitePageController extends Controller
     private function renderReviewBlock(array $data): string
     {
         return view('cms.blocks.review', [
+            'reviewerSlug' => trim((string) ($data['reviewer_slug'] ?? '')),
             'reviewerName' => trim((string) ($data['reviewer_name'] ?? '')),
             'buttonText' => trim((string) ($data['button_text'] ?? '')),
             'title' => (string) ($data['title'] ?? ''),
             'image' => $this->resolvePublicUrl((string) ($data['image'] ?? '')),
             'text' => (string) ($data['text'] ?? ''),
         ])->render();
+    }
+
+    private function renderContactFormBlock(): string
+    {
+        return view('cms.blocks.contact-form')->render();
+    }
+
+    private function renderApplyFormBlock(): string
+    {
+        return view('cms.blocks.apply-form')->render();
+    }
+
+    private function findPublishedPage(string $slug): ?Page
+    {
+        try {
+            return Page::query()
+                ->where('slug', $slug)
+                ->where('is_published', true)
+                ->first();
+        } catch (Throwable) {
+            return null;
+        }
+    }
+
+    private function reviewerSlug(Post $post): string
+    {
+        $slug = trim((string) ($post->slug ?? ''));
+
+        if ($slug !== '') {
+            return trim($slug, '/');
+        }
+
+        return Str::slug(Str::lower(trim((string) ($post->name ?? ''))));
+    }
+
+    private function publicationSlug(Post $post): string
+    {
+        $slug = trim((string) ($post->slug ?? ''));
+
+        if ($slug !== '') {
+            return trim($slug, '/');
+        }
+
+        return Str::slug(Str::lower(trim((string) ($post->title ?? ''))));
     }
 
     private function resolvePublicUrl(?string $path): ?string
@@ -339,6 +545,7 @@ class SitePageController extends Controller
         return match ($template) {
             'homepage' => 'cms.layouts.homepage',
             'full_screen' => 'cms.layouts.full-screen',
+            'form' => 'cms.layouts.form',
             default => 'cms.layouts.default',
         };
     }

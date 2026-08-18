@@ -1,0 +1,55 @@
+@php
+    $errorMessages = $errors->getBag('default')->all();
+@endphp
+
+<div class="cms-form-block-form cms-contact-form-block">
+    @include('cms.partials.form-feedback', [
+        'successMessage' => (string) session('contact_success', ''),
+        'errorMessages' => $errorMessages,
+        'errorTitle' => 'Controleer het formulier:',
+    ])
+
+    <form method="post" action="{{ route('contact.submit') }}" class="cms-native-form" novalidate>
+        @csrf
+
+        <div class="cms-native-form-row cms-native-form-row-split">
+            <div class="cms-native-form-field">
+                <label for="contact-first-name">Voornaam</label>
+                <input id="contact-first-name" type="text" name="wpforms[fields][0][first]" value="{{ old('wpforms.fields.0.first') }}" required>
+                @error('wpforms.fields.0.first')<p class="cms-native-form-error">{{ $message }}</p>@enderror
+            </div>
+            <div class="cms-native-form-field">
+                <label for="contact-last-name">Achternaam</label>
+                <input id="contact-last-name" type="text" name="wpforms[fields][0][last]" value="{{ old('wpforms.fields.0.last') }}" required>
+                @error('wpforms.fields.0.last')<p class="cms-native-form-error">{{ $message }}</p>@enderror
+            </div>
+        </div>
+
+        <div class="cms-native-form-honeypot" aria-hidden="true">
+            <label for="contact-honeypot">Telefoonnummer Email Naam</label>
+            <input id="contact-honeypot" type="text" name="wpforms[fields][2]" value="{{ old('wpforms.fields.2') }}" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="cms-native-form-field">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" type="email" name="wpforms[fields][1]" value="{{ old('wpforms.fields.1') }}" required>
+            @error('wpforms.fields.1')<p class="cms-native-form-error">{{ $message }}</p>@enderror
+        </div>
+
+        <div class="cms-native-form-field">
+            <label for="contact-phone">Telefoonnummer</label>
+            <input id="contact-phone" type="text" name="wpforms[fields][9]" value="{{ old('wpforms.fields.9') }}" required>
+            @error('wpforms.fields.9')<p class="cms-native-form-error">{{ $message }}</p>@enderror
+        </div>
+
+        <div class="cms-native-form-field">
+            <label for="contact-message">Bericht</label>
+            <textarea id="contact-message" name="wpforms[fields][3]" rows="7" required>{{ old('wpforms.fields.3') }}</textarea>
+            @error('wpforms.fields.3')<p class="cms-native-form-error">{{ $message }}</p>@enderror
+        </div>
+
+        <div class="cms-native-form-actions">
+            <button type="submit" class="cms-native-form-submit">Verstuur</button>
+        </div>
+    </form>
+</div>

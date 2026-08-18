@@ -1,4 +1,8 @@
-<section class="cms-section cms-homepage-tekst">
+@php
+    $reviewerSlug = \Illuminate\Support\Str::slug(\Illuminate\Support\Str::lower($title));
+@endphp
+
+<section id="{{ $reviewerSlug }}" class="cms-section cms-homepage-tekst">
     <div class="block-shape-top">
         <span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 84.94" preserveAspectRatio="none">

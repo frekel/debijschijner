@@ -1,7 +1,3 @@
-@php
-    $reviewerSlug = \Illuminate\Support\Str::slug(\Illuminate\Support\Str::lower($reviewerName));
-@endphp
-
 <article class="review-card">
     <div class="review-card-media" @if($image) style="background-image: url('{{ $image }}');" @endif>
         <div class="review-card-overlay">
@@ -16,5 +12,4 @@
             </a>
         </div>
     </div>
-
 </article>
