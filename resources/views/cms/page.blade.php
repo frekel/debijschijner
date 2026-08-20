@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="/xfn/11">
     <link rel="pingback" href="/xmlrpc.php">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <title>{{ $title ?? 'Verlicht jouw onderwijs!' }}</title>
     <meta name='robots' content='max-image-preview:large'/>
 
